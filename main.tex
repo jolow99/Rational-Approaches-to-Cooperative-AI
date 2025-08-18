@@ -51,10 +51,24 @@
 \begin{itemize}
     \item There is empirical support that humans intuitively use utility-based reasoning to make sense of other people's behavior
 \end{itemize}
+\pause
+
 \vspace{0.5cm}
+\begin{columns}
+\begin{column}{0.5\textwidth}
 \begin{center}
-\includegraphics[width=0.4\textwidth]{utility1.png}
+\includegraphics[width=0.8\textwidth]{utility1.png}
 \end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+\pause
+\begin{itemize}
+    \item Pursue/forego high/low-cost implies reward was even higher/lower
+    \pause
+    \item Pursue/forego low/high-cost does not give info about reward
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -93,47 +107,136 @@
 
 \begin{frame}
 \frametitle{Graded Preference Inference}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{utility3.png}
+\end{center}
+
+\vspace{0.3cm}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{Fig.1: Pursue high-cost}: Agent pays high cost (long detour) to get purple star → strong preference inference
+    \pause
+    \item \textbf{Fig.2: Pursue low-cost}: Agent pays low cost (short path) to get purple star → weak preference inference
+    \pause
+    \item \textbf{Fig.3: Forego high-cost}: Agent foregoes high cost (doesn't climb wall) to get green star, chooses purple instead → no preference inference
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Costs Vary Across Agents}
-\begin{itemize}
-    \item [Content to be added]
-\end{itemize}
-\end{frame}
+\frametitle{Costs and Rewards Vary Across Agents}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{utility4.png}
+\end{center}
 
-\begin{frame}
-\frametitle{Rewards Vary Across Agents}
+\vspace{0.3cm}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{Costs vary}: Blue agent can climb walls easily, pink agent cannot → different action costs
+    \pause
+    \item \textbf{Rewards vary}: Blue agent prefers red stars, pink agent prefers green stars → different goal values
+    \pause
+    \item \textbf{Same action, different inference}: Identical behavior can imply different preferences based on agent capabilities and values
 \end{itemize}
 \end{frame}
 
 \section{Related Work}
 \begin{frame}
-\frametitle{Inverse Decision-Making}
+\frametitle{Feature-Based Approach}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{feature_based.png}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{Method}: Look at simple features of the choice and apply rules
+    \item \textbf{Example}: Alice chooses \{eggplant sandwich\} over \{turkey, tuna, ham\}
+    \item \textbf{Feature}: "She chose the only option with eggplant"
+    \item \textbf{Rule}: "When someone picks the unique option, they probably like that thing"
+    \item \textbf{Conclusion}: "Alice likes eggplant"
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Inverse Decision-Making Approach}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{inverse_decision.png}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+    \item \textbf{Method}: Use a model of how people actually make decisions, then work backwards
+    \item \textbf{Example}: Same choice - Alice chooses \{eggplant sandwich\} over \{turkey, tuna, ham\}
+    \item \textbf{Model thinking}: "If Alice really liked eggplant, how likely would she be to make this choice? What if she liked turkey instead? What if she just wanted any sandwich?"
+    \item \textbf{Calculation}: Uses math to figure out which preference scenario makes this choice most probable
+    \item \textbf{Conclusion}: "Alice probably likes eggplant" (but with precise confidence levels)
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{NUC vs. Inverse Decision-Making}
+\begin{itemize}
+    \item \textbf{Similarity}: NUC is similar to inverse decision-making as it works on assumption that agents maximize utilities
+    \item \textbf{Key Differences}:
+    \begin{itemize}
+        \item Uses events with complex spatiotemporal structures and not just isolated discrete choices
+        \item Computes both variables costs and rewards, whereas inverse decision-making only infers rewards without costs
+    \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Inverse Planning}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=1.0\textwidth]{inverse_planning.png}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Belief-Desire Psychology ("Forward-thinking")}
 \begin{itemize}
-    \item Inferring goals and preferences from observed actions
-    \item Often modeled using Markov Decision Processes (MDPs)
-    \item Agent state transitions and reward functions
-    \item [Additional content to be added]
+    \item Belief + Desire → Action
+    \item "Sarah believes store is open + wants coffee → walks to coffee shop"
 \end{itemize}
+
+\vspace{0.4cm}
+\textbf{Inverse Planning ("Backward-thinking")}
+\begin{itemize}
+    \item Observe: Environment + Action → Infer: Goal
+    \item "See maze layout + this path → agent wants point A"
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Goal-Directed Action Understanding}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{goal_directed.png}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Limitations}
+\begin{itemize}
+    \item Model does not explain multiple causes behind other people's goals
+    \item Treats cost as constant, observable and uniform across agents
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{Research Questions}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{RQ1}: Can NUC support joint inference of costs and rewards when we know neither, using a coherent generative model?
+    \item \textbf{RQ2}: Does NUC drive fine-grained quantitative inferences or only coarse qualitative ones?
+    \item \textbf{RQ3}: Is NUC a unified generative model supporting probabilistic inference, or a collection of simple heuristics?
 \end{itemize}
 \end{frame}
 
@@ -233,28 +336,59 @@ Rational Action & Efficient execution & $p(A|I)$ via MDP policy \\
 \begin{frame}
 \frametitle{Experimental Setup}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{Domain}: Gridworld navigation tasks with agents moving toward goals
+    \item \textbf{Participants}: Online studies using Amazon Mechanical Turk
+    \item \textbf{Method}: Participants watch agent behaviors and make preference judgments
+    \item \textbf{Key Variables}: Action costs (walls, detours), goal rewards (different objects), agent capabilities
+    \item \textbf{Measures}: Preference strength ratings, choice predictions, confidence judgments
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Experiment 1}
+\frametitle{Experiment 1: Graded Preference Inference}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{Question}: Do people make graded preference inferences based on action efficiency?
+    \item \textbf{Design}: Agents choose between two goals with varying path costs
+    \item \textbf{Manipulation}: High cost vs. low cost paths to preferred goal
+    \item \textbf{Results}: 
+    \begin{itemize}
+        \item Higher costs → stronger preference inferences
+        \item Lower costs → weaker preference inferences
+        \item Linear relationship between cost and inferred preference strength
+    \end{itemize}
+    \item \textbf{Conclusion}: People make graded preference inferences consistent with NUC
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Experiment 2}
+\frametitle{Experiment 2: Individual Differences in Costs}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{Question}: Do people consider individual differences in action costs?
+    \item \textbf{Design}: Two agents with different capabilities (can/cannot climb walls)
+    \item \textbf{Manipulation}: Same action, different costs for each agent
+    \item \textbf{Results}:
+    \begin{itemize}
+        \item People adjusted preference inferences based on agent capabilities
+        \item Wall-climbing agent: weaker preference for taking long route
+        \item Non-climbing agent: stronger preference for taking long route
+    \end{itemize}
+    \item \textbf{Conclusion}: People consider individual cost differences when inferring preferences
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Experiment 5}
+\frametitle{Experiment 5: Joint Cost-Reward Inference}
 \begin{itemize}
-    \item [Content to be added]
+    \item \textbf{Question}: Can people jointly infer costs and rewards from agent behavior?
+    \item \textbf{Design}: Agents with unknown capabilities and unknown goal preferences
+    \item \textbf{Manipulation}: Multiple trials revealing different cost-reward tradeoffs
+    \item \textbf{Results}:
+    \begin{itemize}
+        \item People successfully inferred both costs and rewards simultaneously
+        \item Judgments consistent with Bayesian model predictions
+        \item Performance improved with more observations
+    \end{itemize}
+    \item \textbf{Conclusion}: NUC supports complex joint inference in realistic scenarios
 \end{itemize}
 \end{frame}
 
@@ -262,10 +396,24 @@ Rational Action & Efficient execution & $p(A|I)$ via MDP policy \\
 \begin{frame}
 \frametitle{Discussion}
 \begin{itemize}
-    \item Summary of key points
-    \item Main takeaways from this presentation
-    \item Future directions and next steps
-    \item Questions and discussion
+    \item \textbf{Key Findings}: People use Naive Utility Calculus for preference inference
+    \begin{itemize}
+        \item Make graded inferences based on action efficiency
+        \item Consider individual differences in costs and rewards
+        \item Perform complex joint inference of multiple variables
+    \end{itemize}
+    \item \textbf{Theoretical Contribution}: NUC as a unified computational framework
+    \begin{itemize}
+        \item Goes beyond simple heuristics
+        \item Supports probabilistic inference mechanisms
+        \item Handles spatiotemporal action sequences
+    \end{itemize}
+    \item \textbf{Future Directions}: 
+    \begin{itemize}
+        \item Real-world applications beyond gridworlds
+        \item Neural mechanisms underlying utility-based reasoning
+        \item Cross-cultural and developmental studies
+    \end{itemize}
 \end{itemize}
 \end{frame}
 
