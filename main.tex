@@ -43,7 +43,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Naive Utility}
+\frametitle{Utility-based decision-making}
 \begin{center}
 \Large $\text{Utility} = \text{Rewards} - \text{Costs}$
 \end{center}
@@ -63,9 +63,13 @@
 \begin{column}{0.5\textwidth}
 \pause
 \begin{itemize}
-    \item Pursue/forego high/low-cost implies reward was even higher/lower
+    \item Pursue high-cost implies reward was even higher
     \pause
-    \item Pursue/forego low/high-cost does not give info about reward
+    \item Pursue low-cost does not give info about reward
+    \pause
+    \item Forego high-cost does not give info about reward
+    \pause
+    \item Forego low-cost implies reward was even lower
 \end{itemize}
 \end{column}
 \end{columns}
@@ -108,11 +112,16 @@
 \begin{frame}
 \frametitle{Graded Preference Inference}
 \begin{center}
+Does the agent prefer the green or purple star? To what extent? 
+\end{center}
+\vspace{0.3cm}
+\begin{center}
 \includegraphics[width=0.7\textwidth]{utility3.png}
 \end{center}
 
 \vspace{0.3cm}
 \begin{itemize}
+    \pause
     \item \textbf{Fig.1: Pursue high-cost}: Agent pays high cost (long detour) to get purple star → strong preference inference
     \pause
     \item \textbf{Fig.2: Pursue low-cost}: Agent pays low cost (short path) to get purple star → weak preference inference
@@ -124,11 +133,16 @@
 \begin{frame}
 \frametitle{Costs and Rewards Vary Across Agents}
 \begin{center}
+What do the agent's actions imply about their preferences?
+\end{center}
+\vspace{0.3cm}
+\begin{center}
 \includegraphics[width=0.7\textwidth]{utility4.png}
 \end{center}
 
 \vspace{0.3cm}
 \begin{itemize}
+    \pause
     \item \textbf{Costs vary}: Blue agent can climb walls easily, pink agent cannot → different action costs
     \pause
     \item \textbf{Rewards vary}: Blue agent prefers red stars, pink agent prefers green stars → different goal values
@@ -240,157 +254,481 @@
 \end{itemize}
 \end{frame}
 
-\section{NUC Computational Framework}
+\section{Experiments}
 
 \begin{frame}
-\frametitle{Hierarchical Mind Model}
+\frametitle{Interactive Experiment}
+\begin{columns}
+\begin{column}{0.4\textwidth}
 \begin{center}
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Level} & \textbf{Component} & \textbf{Observable?} \\
-\hline
-4 & \textcolor{blue}{Desires} (Reward functions) & \textcolor{red}{No} \\
-\hline
-3 & \textcolor{blue}{Goals} (World states) & \textcolor{red}{No} \\
-\hline
-2 & \textcolor{blue}{Intentions} (Goal sequences) & \textcolor{red}{No} \\
-\hline
-1 & \textcolor{green}{Actions} (Behaviors) & \textcolor{green}{Yes} \\
-\hline
-\end{tabular}
+\includegraphics[width=\textwidth]{experiment_1a-1.png}
 \end{center}
+\end{column}
+\begin{column}{0.6\textwidth}
+You will watch astronauts land on an alien planet with novel terrains and travel towards their space station. The astronauts can always travel across all types of terrain and can collect up to one care package on their way home.
 
 \vspace{0.5cm}
-\begin{center}
-\Large $\downarrow$ \textbf{Inference Direction} $\uparrow$
-\end{center}
+\textbf{Your Task:} Determine the astronauts'
+\begin{itemize}
+    \item \textbf{Ability} to travel each kind of terrain (costs)
+    \item \textbf{Desire} to collect each care package (rewards)
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
-\frametitle{Generative Process}
-\begin{center}
-\begin{tabular}{c c}
-\colorbox{blue!20}{\parbox{2.5cm}{\centering Desires \\ (Rewards)}} & \\
-$\downarrow$ & + Costs \\
-\colorbox{green!20}{\parbox{2.5cm}{\centering Goals}} & \\
-$\downarrow$ & Utility Max \\
-\colorbox{yellow!20}{\parbox{2.5cm}{\centering Intentions}} & \\
-$\downarrow$ & Observable \\
-\colorbox{red!20}{\parbox{2.5cm}{\centering Actions}} & \\
-\end{tabular}
-\end{center}
+\frametitle{Quick Check}
+\begin{enumerate}
+    \item Do astronauts have identical or different abilities?
+    \vspace{0.5cm}
+    \item Do astronauts have identical or different care package preferences?
+    \vspace{0.5cm}
+    \item Can astronauts always cross all terrains, even if exhausting?
+    \vspace{0.5cm}
+    \item How many care packages must/can astronauts collect?
+\end{enumerate}
 \end{frame}
 
 \begin{frame}
-\frametitle{MDP Planning per Goal}
-\begin{center}
-\textbf{Goal: Reach Object A}
+\frametitle{Quick Check}
+\begin{enumerate}
+    \item Do astronauts have identical or different abilities?
+    \begin{itemize}
+        \item[\textbf{Answer:}] Different astronauts have different abilities
+    \end{itemize}
+    \vspace{0.3cm}
+    \item Do astronauts have identical or different care package preferences?
+    \begin{itemize}
+        \item[\textbf{Answer:}] Different astronauts have different preferences
+    \end{itemize}
+    \vspace{0.3cm}
+    \item Can astronauts always cross all terrains, even if exhausting?
+    \begin{itemize}
+        \item[\textbf{Answer:}] Yes, all astronauts can travel across all terrains
+    \end{itemize}
+    \vspace{0.3cm}
+    \item How many care packages must/can astronauts collect?
+    \begin{itemize}
+        \item[\textbf{Answer:}] Up to one care package (optional)
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions to Answer}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{For Terrain}\\
+"How easy is it to cross this terrain?"
 
 \vspace{0.3cm}
-$V^*(s) = \max_a \sum_{s'} P(s'|s,a)[R(a,s) - C(a,s) + \gamma V^*(s')]$
+\textbf{Scale:} 0 to 10
+\begin{itemize}
+    \item \textbf{0} = Extremely easy
+    \item \textbf{5} = Average  
+    \item \textbf{10} = Extremely exhausting
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Care Package}\\
+"How much does the astronaut like this container?"
+
+\vspace{0.3cm}
+\textbf{Scale:} 0 to 10
+\begin{itemize}
+    \item \textbf{0} = Not at all
+    \item \textbf{5} = Average
+    \item \textbf{10} = A lot
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Experiment 1a-1}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+    \begin{center}
+    \includegraphics[width=0.9\textwidth]{experiment_1a-1.png}
+    \end{center}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    Based on this astronaut's path, rate on a scale of 0-10:
+    
+    \vspace{0.2cm}
+    \textbf{1. Red terrain} \includegraphics[width=0.8cm]{red_terrain.png}\\
+    How easy is it to cross?
+    \vspace{0.2cm}
+    
+    \textbf{2. Blue terrain} \includegraphics[width=0.8cm]{blue_terrain.png}\\
+    How easy is it to cross?
+    \vspace{0.2cm}
+    
+    \textbf{3. White care package} \includegraphics[width=0.8cm]{white_carepackage.png}\\
+    How much does the astronaut like it?
+    \vspace{0.2cm}
+    
+    \textbf{4. Orange care package} \includegraphics[width=0.8cm]{orange_carepackage.png}\\
+    How much does the astronaut like it?
+    \end{column}
+    \end{columns}
+    \end{frame}
+
+\begin{frame}
+\frametitle{Experiment 1a-2}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{experiment_1a-2.png}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+Based on this astronaut's path, rate on a scale of 0-10:
+
+\vspace{0.2cm}
+\textbf{1. Red terrain} \includegraphics[width=0.8cm]{red_terrain.png}\\
+How easy is it to cross?
+\vspace{0.2cm}
+
+\textbf{2. Blue terrain} \includegraphics[width=0.8cm]{blue_terrain.png}\\
+How easy is it to cross?
+\vspace{0.2cm}
+
+\textbf{3. White care package} \includegraphics[width=0.8cm]{white_carepackage.png}\\
+How much does the astronaut like it?
+\vspace{0.2cm}
+
+\textbf{4. Orange care package} \includegraphics[width=0.8cm]{orange_carepackage.png}\\
+How much does the astronaut like it?
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 1b-1}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{experiment_1b-1.png}
+\end{center}
+\vspace{0.3cm}
+Based on this astronaut's path, rate on a scale of 0-10:
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{1. Blue terrain} \includegraphics[width=0.8cm]{blue_terrain.png}\\
+How easy is it to cross?
+\vspace{0.3cm}
+
+\textbf{2. Yellow terrain} \includegraphics[width=0.8cm]{yellow_terrain.png}\\
+How easy is it to cross?
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{3. White care package} \includegraphics[width=0.8cm]{white_carepackage.png}\\
+How much does the astronaut like it?
+\vspace{0.3cm}
+
+\textbf{4. Orange care package} \includegraphics[width=0.8cm]{orange_carepackage.png}\\
+How much does the astronaut like it?
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 1b-2}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{experiment_1b-2.png}
+\end{center}
+\vspace{0.3cm}
+Based on this astronaut's path, rate on a scale of 0-10:
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{1. Blue terrain} \includegraphics[width=0.8cm]{blue_terrain.png}\\
+How easy is it to cross?
+\vspace{0.3cm}
+
+\textbf{2. Yellow terrain} \includegraphics[width=0.8cm]{yellow_terrain.png}\\
+How easy is it to cross?
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{3. White care package} \includegraphics[width=0.8cm]{white_carepackage.png}\\
+How much does the astronaut like it?
+\vspace{0.3cm}
+
+\textbf{4. Orange care package} \includegraphics[width=0.8cm]{orange_carepackage.png}\\
+How much does the astronaut like it?
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 1c-1}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{experiment_1c-1.png}
+\end{center}
+\vspace{0.3cm}
+Based on this astronaut's path, rate on a scale of 0-10:
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{1. Red terrain} \includegraphics[width=0.8cm]{red_terrain.png}\\
+How easy is it to cross?
+\vspace{0.3cm}
+
+\textbf{2. Yellow terrain} \includegraphics[width=0.8cm]{yellow_terrain.png}\\
+How easy is it to cross?
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{3. White care package} \includegraphics[width=0.8cm]{white_carepackage.png}\\
+How much does the astronaut like it?
+\vspace{0.3cm}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 1c-2}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{experiment_1c-2.png}
+\end{center}
+\vspace{0.3cm}
+Based on this astronaut's path, rate on a scale of 0-10:
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{1. Red terrain} \includegraphics[width=0.8cm]{red_terrain.png}\\
+How easy is it to cross?
+\vspace{0.3cm}
+
+\textbf{2. Yellow terrain} \includegraphics[width=0.8cm]{yellow_terrain.png}\\
+How easy is it to cross?
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{3. White care package} \includegraphics[width=0.8cm]{white_carepackage.png}\\
+How much does the astronaut like it?
+\vspace{0.3cm}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment Types}
+Participants watched agents navigate worlds with different terrains and care packages to infer cost and reward functions. Three different geometries were used:
+
+\vspace{0.3cm}
+\begin{itemize}
+    \item \textbf{Experiment 1a}: Detours could be explained by either terrain costs or reward differences
+    
+    \item \textbf{Experiment 1b}: Forced terrain crossings vs. optional detours to collect care packages
+    
+    \item \textbf{Experiment 1c}: Minimal physical detours that still reveal agent preferences
+\end{itemize}
+
+\vspace{0.3cm}
+Responses evaluated against Naïve Utility Calculus model and two alternative models.
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 2}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{experiment2-1.png}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+Based on this astronaut's path across both maps, rate on a scale of 0-10:
+
+\vspace{0.2cm}
+\textbf{1. White terrain}\\
+How easy is it to cross?
+\vspace{0.2cm}
+
+\textbf{2. Gray terrain}\\
+How easy is it to cross?
+\vspace{0.2cm}
+
+\textbf{3. Reward A}\\
+How much does the astronaut like it?
+\vspace{0.2cm}
+
+\textbf{4. Reward B}\\
+How much does the astronaut like it?
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Why Experiment 2?}
+Unlike Experiment 1's single events, real-world observations involve multiple actions across different contexts that let us revise beliefs about agents' costs and rewards.
+
+\vspace{0.3cm}
+Experiment 2 tests inference from multiple action events with two purposes:
+
+\vspace{0.3cm}
+\begin{itemize}
+    \item Test if inferences over repeated events follow the full Naïve Utility Calculus model
+    \item Test if a simpler single-event model (using first or most recent observation) explains inferences equally well
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Processing Human Data to "Ground Truth"}
+\textbf{Step 1: Raw Data Collection}
+\begin{itemize}
+    \item Participants rated on 0-10 scales: terrain difficulty (0=easy, 10=exhausting) and care package preference (0=not at all, 10=a lot)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Step 2: Z-Scoring Within Each Participant}
+\begin{itemize}
+    \item Remove individual scale usage differences by standardizing each participant's responses: z = (raw\_response - $\mu$\_participant) / $\sigma$\_participant
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Step 3: Separate by Question Type}
+\begin{itemize}
+    \item Split z-scored responses into cost judgments and reward judgments
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Step 4: Average Across Participants}
+\begin{itemize}
+    \item For each trial, average z-scores across all participants to create the "ground truth" score
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discussion Questions}
+\begin{enumerate}
+    \item What limitations are there to using humans as the "ground truth" here?
+    \item Is it fair to isolate actions that result in costs and rewards? e.g. What changes if terrains have rewards or care packages have costs?
+\end{enumerate}
+\end{frame}
+
+% \begin{frame}
+% \frametitle{Experiment 5: Joint Cost-Reward Inference}
+% \begin{itemize}
+%     \item \textbf{Question}: Can people jointly infer costs and rewards from agent behavior?
+%     \item \textbf{Design}: Agents with unknown capabilities and unknown goal preferences
+%     \item \textbf{Manipulation}: Multiple trials revealing different cost-reward tradeoffs
+%     \item \textbf{Results}:
+%     \begin{itemize}
+%         \item People successfully inferred both costs and rewards simultaneously
+%         \item Judgments consistent with Bayesian model predictions
+%         \item Performance improved with more observations
+%     \end{itemize}
+%     \item \textbf{Conclusion}: NUC supports complex joint inference in realistic scenarios
+% \end{itemize}
+% \end{frame}
+
+\section{Naive Utility Calculus}
+
+\begin{frame}
+\frametitle{Key Question}
+\begin{center}
+\Large How do we design an algorithm that can give us the cost and reward function for each terrain and care package?
+\end{center}
 
 \vspace{0.5cm}
-\textbf{Policy:} $p(a|s) \propto \exp(\sum_{s'} P(s'|s,a)V^*(s')/\alpha)$
+\textbf{The intuitive solution involves:}
+
+\vspace{0.3cm}
+\begin{enumerate}
+    \item \textbf{Generation (Forward):} Given cost and reward → predict actions
+    \item \textbf{Inference (Backward):} Given the actions → Infer the costs / rewards
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generative model}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{generative_model.png}
+\end{center}
 
 \vspace{0.5cm}
-Each goal $\rightarrow$ Separate MDP $\rightarrow$ Efficient path
-\end{center}
+\begin{itemize}
+    \pause
+    \item \textbf{Desires} = Reward Function
+    \pause
+    \item \textbf{Goals} = States of the world that the agent believes yield rewards
+    \pause
+    \item \textbf{Intentions} = Ordered sequences of goals intended to maximize utilities
+    \pause
+    \item \textbf{Actions} = mappings from states to action which when executed sequentially fulfill each goal in the intention
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{The Inference Problem}
+\frametitle{Generative Model}
 \begin{center}
-\begin{tabular}{c c c}
-\colorbox{blue!20}{\parbox{2.5cm}{\centering \textbf{Hidden} \\ Costs \& Rewards}} 
-& $\longrightarrow$ & 
-\colorbox{red!20}{\parbox{2.5cm}{\centering \textbf{Observed} \\ Actions}} \\
-& Forward & \\
-& $\longleftarrow$ & \\
-& \textcolor{red}{Bayesian Inference} & \\
-\end{tabular}
-
-\vspace{0.8cm}
-$p(C,R|A) \propto p(A|C,R) \cdot p(C,R)$
+\includegraphics[width=0.6\textwidth]{generative_model2.png}
 \end{center}
+
+\vspace{0.3cm}
+\begin{itemize}
+    \pause
+    \item \textbf{Beliefs + Rewards} → Candidate goals
+    \pause
+    \item \textbf{Goals + Action costs} → Specific intentions to act
+    \pause
+    \begin{itemize}
+        \item Constraint: space station must be final goal
+        \item Results in 5 possible intentions: direct path, single package routes, dual package routes
+    \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Two Types of Rationality}
+\frametitle{Markov Decision Processes (MDPs)}
+\begin{columns}
+\begin{column}{0.4\textwidth}
 \begin{center}
-\begin{tabular}{|l|c|c|}
-\hline
-\textbf{Type} & \textbf{What} & \textbf{Formula} \\
-\hline
-Rational Choice & Intention selection & $p(I|C,R) \propto \exp(U(I)/\beta)$ \\
-\hline
-Rational Action & Efficient execution & $p(A|I)$ via MDP policy \\
-\hline
-\end{tabular}
-
-\vspace{0.8cm}
-\textbf{Likelihood:} $p(A|C,R) = \sum_I p(A|I) \cdot p(I|C,R)$
+\includegraphics[width=0.9\textwidth]{mdp.png}
 \end{center}
-\end{frame}
-
-\section{Experiments}
-\begin{frame}
-\frametitle{Experimental Setup}
+\end{column}
+\begin{column}{0.6\textwidth}
+\textbf{Formal definition:} 4-tuple $(S, A, P_a, R_a)$
 \begin{itemize}
-    \item \textbf{Domain}: Gridworld navigation tasks with agents moving toward goals
-    \item \textbf{Participants}: Online studies using Amazon Mechanical Turk
-    \item \textbf{Method}: Participants watch agent behaviors and make preference judgments
-    \item \textbf{Key Variables}: Action costs (walls, detours), goal rewards (different objects), agent capabilities
-    \item \textbf{Measures}: Preference strength ratings, choice predictions, confidence judgments
+    \item \textbf{States} (S): Agent positions
+    \item \textbf{Actions} (A): 8 movement directions  
+    \item \textbf{Transition probabilities} ($P_a$): Not important here (deterministic)
+    \item \textbf{Rewards} ($R_a$): Only at goals
 \end{itemize}
-\end{frame}
 
-\begin{frame}
-\frametitle{Experiment 1: Graded Preference Inference}
+\vspace{0.3cm}
+\textbf{In NUC context:}
 \begin{itemize}
-    \item \textbf{Question}: Do people make graded preference inferences based on action efficiency?
-    \item \textbf{Design}: Agents choose between two goals with varying path costs
-    \item \textbf{Manipulation}: High cost vs. low cost paths to preferred goal
-    \item \textbf{Results}: 
-    \begin{itemize}
-        \item Higher costs → stronger preference inferences
-        \item Lower costs → weaker preference inferences
-        \item Linear relationship between cost and inferred preference strength
-    \end{itemize}
-    \item \textbf{Conclusion}: People make graded preference inferences consistent with NUC
+    \item Actions are deterministic
+    \item Costs vary by terrain type
+    \item Each goal has its own MDP
 \end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{Purpose:} Compute optimal policies to reach goals efficiently, which observers use to infer agent preferences from observed behavior.
 \end{frame}
 
 \begin{frame}
-\frametitle{Experiment 2: Individual Differences in Costs}
+\frametitle{Intentions to Action Policies}
+\textbf{Intentions:} Ordered sequence of goals (target positions)
+
+\vspace{0.2cm}
+\textbf{Utility:} $U = \text{Rewards} - \text{Costs}$
+
+\vspace{0.2cm}
+\textbf{Implementation via MDPs:}
 \begin{itemize}
-    \item \textbf{Question}: Do people consider individual differences in action costs?
-    \item \textbf{Design}: Two agents with different capabilities (can/cannot climb walls)
-    \item \textbf{Manipulation}: Same action, different costs for each agent
-    \item \textbf{Results}:
-    \begin{itemize}
-        \item People adjusted preference inferences based on agent capabilities
-        \item Wall-climbing agent: weaker preference for taking long route
-        \item Non-climbing agent: stronger preference for taking long route
-    \end{itemize}
-    \item \textbf{Conclusion}: People consider individual cost differences when inferring preferences
+    \item Each goal gets its own MDP with single reward at target location
+    \item Cost functions: $C: A \times S \rightarrow \mathbb{R}$ (terrain-dependent)
+    \item Diagonal moves cost $\sqrt{2} \times$ cardinal moves
 \end{itemize}
+
+\vspace{0.2cm}
+\textbf{Policy computation (Value Iteration):}
+$$V(s) = \max_a \sum_{s'} P^a_{s,s'} V(s') + R(a,s) - C(a,s)$$
+
+\vspace{0.2cm}
+\textbf{Softmax policy:} $p(a|s) \propto \exp(\alpha \sum_{s'} P^a_{s,s'} V(s'))$ where $\alpha = 0.1$
 \end{frame}
 
-\begin{frame}
-\frametitle{Experiment 5: Joint Cost-Reward Inference}
-\begin{itemize}
-    \item \textbf{Question}: Can people jointly infer costs and rewards from agent behavior?
-    \item \textbf{Design}: Agents with unknown capabilities and unknown goal preferences
-    \item \textbf{Manipulation}: Multiple trials revealing different cost-reward tradeoffs
-    \item \textbf{Results}:
-    \begin{itemize}
-        \item People successfully inferred both costs and rewards simultaneously
-        \item Judgments consistent with Bayesian model predictions
-        \item Performance improved with more observations
-    \end{itemize}
-    \item \textbf{Conclusion}: NUC supports complex joint inference in realistic scenarios
-\end{itemize}
-\end{frame}
 
 \section{Discussion}
 \begin{frame}
