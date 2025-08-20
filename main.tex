@@ -254,7 +254,7 @@ What do the agent's actions imply about their preferences?
 \end{itemize}
 \end{frame}
 
-\section{Experiments}
+\section{Experiments 1 and 2}
 
 \begin{frame}
 \frametitle{Interactive Experiment}
@@ -676,6 +676,13 @@ Experiment 2 tests inference from multiple action events with two purposes:
 \end{frame}
 
 \begin{frame}
+\frametitle{Discussion Question}
+\begin{center}
+\fcolorbox{blue}{white}{\parbox{0.9\textwidth}{\centering\Large Q1. The NUC model assumes that rational agents undergo a hierarchical planning process: First select an intention (a sequence/plan of goals), then take actions to achieve a goal. Would it be possible to model agents using a "flat" planning process, where agents directly optimize for subjective utility (rewards minus costs), without going through the process of selecting goals? If so, how would that generative model differ in its predictions?}}
+\end{center}
+\end{frame}
+
+\begin{frame}
 \frametitle{Markov Decision Processes (MDPs)}
 \begin{columns}
 \begin{column}{0.4\textwidth}
@@ -686,18 +693,18 @@ Experiment 2 tests inference from multiple action events with two purposes:
 \begin{column}{0.6\textwidth}
 \textbf{Formal definition:} 4-tuple $(S, A, P_a, R_a)$
 \begin{itemize}
-    \item \textbf{States} (S): Agent positions
-    \item \textbf{Actions} (A): 8 movement directions  
-    \item \textbf{Transition probabilities} ($P_a$): Not important here (deterministic)
-    \item \textbf{Rewards} ($R_a$): Only at goals
+    \item<2-> \textbf{States} (S): Agent positions
+    \item<3-> \textbf{Actions} (A): 8 movement directions  
+    \item<4-> \textbf{Transition probabilities} ($P_a$): Not important here (deterministic)
+    \item<5-> \textbf{Rewards} ($R_a$): Only at goals
 \end{itemize}
 
 \vspace{0.3cm}
 \textbf{In NUC context:}
 \begin{itemize}
-    \item Actions are deterministic
-    \item Costs vary by terrain type
-    \item Each goal has its own MDP
+    \item<6-> Actions are deterministic
+    \item<6-> Costs vary by terrain type
+    \item<6-> Each goal has its own MDP
 \end{itemize}
 \end{column}
 \end{columns}
@@ -707,26 +714,218 @@ Experiment 2 tests inference from multiple action events with two purposes:
 \end{frame}
 
 \begin{frame}
+\frametitle{Solving an MDP}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\textbf{3x3 Grid Example:}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+ & & \\
+\hline
+\textbf{S} & \textbf{A} & \\
+\hline
+ & & \\
+\hline
+\end{tabular}
+\end{center}
+\end{column}
+\begin{column}{0.65\textwidth}
+\textbf{A} = Agent (center)\\
+\textbf{S} = Space Station (goal)\\
+\textbf{Optimal Solution:} Agent moves left
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Policy} $\pi(s)$:
+$$\pi^*(s) = \arg\max_a Q^*(s,a)$$
+
+\textbf{Value Function} $V(s)$:
+$$V^*(s) = \max_a Q^*(s,a)$$
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Action-Value} $Q(s,a)$:
+$$Q^*(s,a) = R + \gamma \sum_{s'} P V^*(s')$$
+
+\textbf{Bellman Equation:}
+$$V^*(s) = \max_a [R + \gamma \sum_{s'} P V^*(s')]$$
+\end{column}
+\end{columns}
+
+\vspace{0.1cm}
+{\tiny
+\textbf{Optimal Policy $\pi^*$:} Maps each state to best action ("What should I do here?") $\bullet$ 
+\textbf{Value Function $V^*$:} Expected reward from state with optimal policy ("How good is this state?") $\bullet$ 
+\textbf{Action-Value $Q^*$:} Expected reward for specific action then optimal policy ("How good is this action?")
+}
+\end{frame}
+
+\begin{frame}
 \frametitle{Intentions to Action Policies}
-\textbf{Intentions:} Ordered sequence of goals (target positions)
+\textbf{How do we "fulfill" an intention?}
 
-\vspace{0.2cm}
-\textbf{Utility:} $U = \text{Rewards} - \text{Costs}$
+\vspace{0.3cm}
+\textbf{Answer:} Execute goal-specific MDPs for each goal until complete
 
-\vspace{0.2cm}
-\textbf{Implementation via MDPs:}
+\vspace{0.3cm}
+\textbf{Example Intention:} Orange care package → Space station
 \begin{itemize}
-    \item Each goal gets its own MDP with single reward at target location
-    \item Cost functions: $C: A \times S \rightarrow \mathbb{R}$ (terrain-dependent)
-    \item Diagonal moves cost $\sqrt{2} \times$ cardinal moves
+    \item \textbf{Step 1:} Solve MDP to reach orange care package
+    \item \textbf{Step 2:} Solve MDP from orange package to space station
+    \item Execute these policies sequentially
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Softmax Policy (Realistic Behavior):}
+\begin{itemize}
+    \item People don't always act perfectly - they make mistakes
+    \item \textbf{Softmax:} Agents are more likely to choose good actions, less likely to choose bad ones
+    \item $$p(a|s) \propto \exp(\alpha \cdot \text{Value of action})$$
+    \item $\alpha = 0.1$ (low rationality parameter → nearly optimal behavior)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Inference over the Generative Model}
+\textbf{The Problem:} We observe actions, but need to infer hidden costs and rewards
+
+\vspace{0.3cm}
+\textbf{The Solution:} Bayesian inference - "work backwards" from actions
+$$p(\text{Costs, Rewards}|\text{Actions}) \propto p(\text{Actions}|\text{Costs, Rewards}) \times p(\text{Costs, Rewards})$$
+
+\vspace{0.3cm}
+\textbf{How it works:}
+\begin{itemize}
+    \item \textbf{Prior:} What costs/rewards are plausible? (uniform for novel terrains)
+    \item \textbf{Likelihood:} How probable are these actions given specific costs/rewards?
+    \item \textbf{Posterior:} Which costs/rewards best explain the observed actions?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Two levels of rationality:}
+\begin{itemize}
+    \item \textbf{Rational choice:} Pick intentions that maximize utility
+    \item \textbf{Rational action:} Execute actions that fulfill intentions efficiently
 \end{itemize}
 
 \vspace{0.2cm}
-\textbf{Policy computation (Value Iteration):}
-$$V(s) = \max_a \sum_{s'} P^a_{s,s'} V(s') + R(a,s) - C(a,s)$$
+\textbf{Implementation:} Monte Carlo sampling - test many cost/reward combinations and see which ones make the observed actions most likely
+\end{frame}
 
-\vspace{0.2cm}
-\textbf{Softmax policy:} $p(a|s) \propto \exp(\alpha \sum_{s'} P^a_{s,s'} V(s'))$ where $\alpha = 0.1$
+\section{Experiment 5}
+
+\begin{frame}
+\frametitle{Recap: Research Questions}
+\begin{itemize}
+    \item \textbf{RQ1}: Can NUC support joint inference of costs and rewards when we know neither, using a coherent generative model?
+    \item \textbf{RQ2}: Does NUC drive fine-grained quantitative inferences or only coarse qualitative ones?
+    \item \textbf{RQ3}: Is NUC a unified generative model supporting probabilistic inference, or a collection of simple heuristics?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Experiment 1:} Compare model predictions with human joint inferences of agent's costs and rewards
+
+\vspace{0.3cm}
+\textbf{Experiment 2:} Same comparison when multiple events are combined to make inferences
+
+\vspace{0.3cm}
+\textbf{Experiment 5:} Test how participants infer whether an agent is knowledgeable or ignorant (answers RQ3)
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 5: Knowledge vs. Ignorance}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{experiment_5.png}
+\end{center}
+
+\vspace{0.15cm}
+\textbf{Three Questions Asked:}
+\begin{enumerate}
+    \item \textbf{Attention check:} "Did the position of the care packages switch on the second day?" (Must answer correctly to proceed)
+    
+    \vspace{0.2cm}
+    \item \textbf{Knowledge of rewards:} "Did the astronaut already know the rewards on day 1?"
+    
+    \vspace{0.2cm}
+    \item \textbf{Knowledge of costs:} "Did the astronaut already know the costs on day 1?"
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Response scale:} 0-10 ("Definitely did not" → "Maybe" → "Definitely did")
+\end{frame}
+
+\section{Results}
+
+\begin{frame}
+\frametitle{Alternative Models}
+\textbf{1. NUC Variations:}
+\begin{itemize}
+    \item \textbf{Rate-based model:} $U = R/C$ (maximize reward rate) instead of $U = R - C$
+    \item \textbf{Single-event model:} Use only first or most recent observation instead of integrating all events
+    \item \textbf{Basic goal attribution:} Simple inverse planning without cost-benefit analysis
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{2. Domain-Specific Heuristics:}
+\begin{itemize}
+    \item \textbf{Time-based:} Infer costs from time spent in each terrain
+    \item \textbf{Collection-based:} Infer rewards from which objects are collected
+    \item \textbf{Change-based:} Associate behavior changes with ignorance
+    \item \textbf{Action-based:} Judge traits solely from specific actions (helping = nice)
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Goal:} Test if NUC captures fine-grained inferences that simpler alternatives miss
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 1 Results}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{results_1.png}
+\end{center}
+
+\vspace{0.05cm}
+\begin{itemize}
+    \item \textbf{NUC model:} High correlations (0.85 costs, 0.95 rewards)
+    \item \textbf{Rate model:} Lower correlations (0.70 costs, 0.87 rewards) 
+    \item \textbf{Heuristic:} High overall correlation but missed fine-grained patterns
+    \item \textbf{Conclusion:} People make graded inferences consistent with utility maximization, not just simple heuristics
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 2 Results}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{results_2.png}
+\end{center}
+
+\vspace{0.05cm}
+\begin{itemize}
+    \item \textbf{Full NUC model:} High correlations (0.86 costs, 0.92 rewards)
+    \item \textbf{First-only model:} Lower correlations (0.61 costs, 0.69 rewards)
+    \item \textbf{Second-only model:} Lower correlations (0.57 costs, 0.68 rewards)
+    \item \textbf{Conclusion:} People integrate information from multiple events for more precise inferences
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment 5 Results}
+\begin{center}
+\includegraphics[width=0.4\textwidth]{results_5.png}
+\end{center}
+
+\vspace{0.05cm}
+\begin{itemize}
+    \item \textbf{NUC model:} High correlations (0.93 costs, 0.83 rewards)
+    \item \textbf{Simple heuristic:} High overall correlation (0.97 costs, 0.99 rewards) but predicts only bimodal judgments
+    \item \textbf{Graded sensitivity:} Participants showed nuanced inferences within heuristic clusters
+    \item \textbf{Conclusion:} People make sophisticated inferences about agent knowledge, not just binary ignorant/knowledgeable judgments
+\end{itemize}
+
 \end{frame}
 
 
@@ -734,24 +933,7 @@ $$V(s) = \max_a \sum_{s'} P^a_{s,s'} V(s') + R(a,s) - C(a,s)$$
 \begin{frame}
 \frametitle{Discussion}
 \begin{itemize}
-    \item \textbf{Key Findings}: People use Naive Utility Calculus for preference inference
-    \begin{itemize}
-        \item Make graded inferences based on action efficiency
-        \item Consider individual differences in costs and rewards
-        \item Perform complex joint inference of multiple variables
-    \end{itemize}
-    \item \textbf{Theoretical Contribution}: NUC as a unified computational framework
-    \begin{itemize}
-        \item Goes beyond simple heuristics
-        \item Supports probabilistic inference mechanisms
-        \item Handles spatiotemporal action sequences
-    \end{itemize}
-    \item \textbf{Future Directions}: 
-    \begin{itemize}
-        \item Real-world applications beyond gridworlds
-        \item Neural mechanisms underlying utility-based reasoning
-        \item Cross-cultural and developmental studies
-    \end{itemize}
+    \item Experiment 5 tests whether the NUC model can infer whether agents are initially ignorant or knowledgeable about their costs or rewards (i.e. their desires). However, the paper itself doesn't describe how knowledge/ignorance about one's own desires is accounted for in the generative model. How do you think the generative model presented in Section 2 could be modified to account for knowledge/ignorance of one's own rewards or costs?
 \end{itemize}
 \end{frame}
 
