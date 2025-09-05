@@ -695,28 +695,21 @@ Experiment 2 tests inference from multiple action events with two purposes:
 \begin{itemize}
     \item<2-> \textbf{States} (S): Agent positions
     \item<3-> \textbf{Actions} (A): 8 movement directions  
-    \item<4-> \textbf{Transition probabilities} ($P_a$): Not important here (deterministic)
+    \item<4-> \textbf{Transition probabilities} ($P_a$): 1 (Prob. of moving to state with given action, not impt in this context) 
     \item<5-> \textbf{Rewards} ($R_a$): Only at goals
-\end{itemize}
-
-\vspace{0.3cm}
-\textbf{In NUC context:}
-\begin{itemize}
-    \item<6-> Actions are deterministic
-    \item<6-> Costs vary by terrain type
-    \item<6-> Each goal has its own MDP
+    \item<6-> \textbf{In NUC context}: Each goal has its own MDP
 \end{itemize}
 \end{column}
 \end{columns}
 
 \vspace{0.3cm}
-\textbf{Purpose:} Compute optimal policies to reach goals efficiently, which observers use to infer agent preferences from observed behavior.
+\only<7->{\textbf{Purpose:} Compute optimal policies to reach goals efficiently, which observers use to infer agent preferences from observed behavior.}
 \end{frame}
 
 \begin{frame}
 \frametitle{Solving an MDP}
 \begin{columns}
-\begin{column}{0.3\textwidth}
+\begin{column}{0.25\textwidth}
 \textbf{3x3 Grid Example:}
 \begin{center}
 \begin{tabular}{|c|c|c|}
@@ -730,7 +723,7 @@ Experiment 2 tests inference from multiple action events with two purposes:
 \end{tabular}
 \end{center}
 \end{column}
-\begin{column}{0.65\textwidth}
+\begin{column}{0.55\textwidth}
 \textbf{A} = Agent (center)\\
 \textbf{S} = Space Station (goal)\\
 \textbf{Optimal Solution:} Agent moves left
@@ -739,14 +732,14 @@ Experiment 2 tests inference from multiple action events with two purposes:
 
 \vspace{0.2cm}
 \begin{columns}
-\begin{column}{0.48\textwidth}
+\begin{column}{0.42\textwidth}
 \textbf{Policy} $\pi(s)$:
 $$\pi^*(s) = \arg\max_a Q^*(s,a)$$
 
 \textbf{Value Function} $V(s)$:
 $$V^*(s) = \max_a Q^*(s,a)$$
 \end{column}
-\begin{column}{0.48\textwidth}
+\begin{column}{0.42\textwidth}
 \textbf{Action-Value} $Q(s,a)$:
 $$Q^*(s,a) = R + \gamma \sum_{s'} P V^*(s')$$
 
@@ -757,8 +750,8 @@ $$V^*(s) = \max_a [R + \gamma \sum_{s'} P V^*(s')]$$
 
 \vspace{0.1cm}
 {\tiny
-\textbf{Optimal Policy $\pi^*$:} Maps each state to best action ("What should I do here?") $\bullet$ 
-\textbf{Value Function $V^*$:} Expected reward from state with optimal policy ("How good is this state?") $\bullet$ 
+\textbf{Optimal Policy $\pi^*$:} Maps each state to best action ("What should I do here?")\\
+\textbf{Value Function $V^*$:} Expected reward from state with optimal policy ("How good is this state?")\\
 \textbf{Action-Value $Q^*$:} Expected reward for specific action then optimal policy ("How good is this action?")
 }
 \end{frame}
@@ -934,6 +927,34 @@ $$p(\text{Costs, Rewards}|\text{Actions}) \propto p(\text{Actions}|\text{Costs, 
 \frametitle{Discussion}
 \begin{itemize}
     \item Experiment 5 tests whether the NUC model can infer whether agents are initially ignorant or knowledgeable about their costs or rewards (i.e. their desires). However, the paper itself doesn't describe how knowledge/ignorance about one's own desires is accounted for in the generative model. How do you think the generative model presented in Section 2 could be modified to account for knowledge/ignorance of one's own rewards or costs?
+\end{itemize}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}
+\frametitle{Conclusion}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{results_2.png}
+\end{center}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Key Findings:}
+\begin{itemize}
+    \item \textbf{NUC superiority:} Full NUC (r = 0.86-0.92) significantly outperformed single-event models
+    \item \textbf{Information integration:} People combine multiple observations for more precise inferences
+    \item \textbf{Quantitative reasoning:} Humans make fine-grained utility calculations, not just simple heuristics
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{Implications:}
+\begin{itemize}
+    \item Naive Utility Calculus provides a unified framework for understanding social cognition
+    \item People intuitively use sophisticated cost-benefit analysis to interpret behavior
+    \item Multiple observations allow for joint inference of both costs and rewards simultaneously
 \end{itemize}
 \end{frame}
 
