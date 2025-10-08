@@ -4,7 +4,7 @@
   title: "Collective Convergence on Institutional Structures: Progress Report",
   authors: (
     (name: "Joseph Low", email: "jolow999@gmail.com", affiliation: "Metagov"),
-    (name: "Emiel Robben", email: "placeholder@gmail.com", affiliation: "Metagov"),
+    (name: "Emiel Robben", email: "emiel@gmail.com", affiliation: "Metagov"),
   ),
   abstract: [This progress report documents our work investigating how agents with uncertain beliefs about collective structure converge on shared institutional understanding through Bayesian inference. We report on our implementation of baseline coordination models and outline remaining work to incorporate asymmetry and inverse planning approaches.],
   date: "Oct 10, 2025",
