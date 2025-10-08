@@ -1,4 +1,3 @@
-Install typst. Run these two commands on separate terminals to have hot-reloading when editing typ files.
-
-`typst watch main.typ`
-`open -a Skim main.pdf`
+Install typst. Run these commands to have hot-reloading when editing typ files. 
+1. `open -a Skim main.pdf`
+2. `typst watch main.typ`
