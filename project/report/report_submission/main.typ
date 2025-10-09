@@ -33,11 +33,12 @@ We implemented a baseline two-agent coordination model in the MeMo framework exp
 
 the question is how leadership (hierarchies) spontaneously emerge when a random group of strangers needs to solve a problem together. 
 
-Emiel has been in this situation when for intro week he and a bunch of strangers needed top compoete agianst other groups of strangers to solve challenges in sequence. 
+Emiel has been in this situation when for intro week he and a bunch of strangers needed top compete against other groups of strangers to solve challenges in sequence. 
 
 we can model it like this: 
 agent A sees how the team solves problems, and might think that he has some insight that others dont have. he tries to show that he has some insight
-by being more proactive in helping to solve the next challenge. say this leads to a higher score for the challenge. others might see this difference and link it to agent A.
+by being more proactive in helping to solve the next challenge. he tries to show this in a way the others will understand (similar to the pragmatic speaker).
+Say this leads to a higher score for the challenge. others might see this difference and link it to agent A.
 in their minds they might model A as more competent, and might pay attention more to him when he says or does something (produces data). 
 
 Joseph Henrich mentioned in his book ¨The secret of our success¨ that there are 2 types of hierarchies: dominance hierarchies and prestige hierarchies. 
