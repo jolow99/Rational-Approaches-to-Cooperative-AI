@@ -1,0 +1,12 @@
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px', 'fontFamily':'Arial'}}}%%
+graph LR
+    ServiceRep["<b>Service Rep</b><br/><br/>Occupied By: Paul or Alex<br/>Powers: Process rentals<br/>Obligations: Resolve disputes"]
+    Customer["<b>Customer</b><br/><br/>Occupied By: Laurie<br/>Powers: Request service<br/>Obligations: Pay fees"]
+
+    %% Edge norms between roles
+    ServiceRep ==> |"Assist, serve"| Customer
+    Customer ==> |"Request, demand"| ServiceRep
+
+    %% Styling
+    style ServiceRep fill:#e8f4f8,stroke:#2c5aa0,stroke-width:4px
+    style Customer fill:#f8e8e8,stroke:#a02c2c,stroke-width:4px

@@ -2,11 +2,19 @@
 #import "@preview/metropolis-polylux:0.1.0" as metropolis
 #import metropolis: new-section, focus
 
+#enable-handout-mode(true)
+
 #show: metropolis.setup.with(
   text-font: "Helvetica Neue",
   math-font: "New Computer Modern Math",
   code-font: "Monaco",
 )
+
+// Set up footer with slide numbers
+#set page(footer: [
+  #set text(size: 0.8em, fill: gray)
+  #align(right)[#toolbox.slide-number / #toolbox.last-slide-number]
+])
 
 #slide[
   #set page(header: none, footer: none, margin: 3em)
@@ -45,740 +53,628 @@
 #slide[
   = Outline
 
-  #metropolis.outline
+  #toolbox.all-sections((sections, current) => {
+    enum(..sections)
+  })
 ]
 
-#new-section[The Core Argument]
+#new-section[Introduction]
 
 #slide[
-  = The Standard View: It's All About Mentalizing
+  = The Puzzle: Friday at the Office
 
-  *Dominant explanation of human social cognition:*
-  - We understand behavior through Theory of Mind
-  - Attribute mental states: beliefs, desires, intentions
-  - This mentalistic stance is uniquely human
-  - Emerges early, supported by specialized neural circuitry
-
-  #v(1em)
-
-  *But is this the whole story?*
-]
-
-#slide[
-  = Kate & Eric: The Puzzle
-
-  *At the office (Monday):*
-
-  Kate steps out of her glass office, waves at Eric at his desk:
-
-  _"Can you feed my parking meter, pick up lunch, print the documents I emailed you, and push my next appointment by 30 minutes?"_
-
-  Eric jots it down and rushes out.
-
-  #v(1em)
-
-  *At the movies (Saturday):*
-
-  Kate spots Eric a few rows behind her (on a date).
-
-  She waves him over: _"Get me some popcorn and a fountain drink."_
-
-  #v(0.5em)
-
-  #text(fill: red)[*Why does this feel so wrong?*]
+  #toolbox.side-by-side[
+    #image("images/office.jpg", width: 100%)
+  ][
+    #one-by-one[
+      Imagine you're interning at a company.
+    ][
+      #v(1em)
+      Your boss comes in and asks you: "Can you help me get lunch and print out these documents?"
+    ][
+      #v(1em)
+      You get it done.
+    ]
+  ]
 ]
 
 #slide[
-  = The Mentalistic Analysis Falls Short
+  = The Puzzle: Saturday at the Movies
 
-  *Mentalistic interpretation (Monday):*
-  - Kate wants lunch, believes Eric can fulfill this
-  - Eric wants to fulfill Kate's desires, believes he can
-
-  #v(0.5em)
-
-  *Mentalistic interpretation (Saturday):*
-  - Same desires! Same beliefs!
-  - Why is Eric surprised? Why is Kate's behavior inappropriate?
-
-  #v(1em)
-
-  *Missing piece: Roles*
-  - Monday: Eric is Kate's assistant (institutional role active)
-  - Saturday: They're acquaintances (different role context)
-  - The role determines what's appropriate, not just mental states
+  #toolbox.side-by-side[
+    #image("images/movies.jpeg", width: 100%)
+  ][
+    #one-by-one[
+      You go to watch a movie.
+    ][
+      #v(1em)
+      Then your boss spots you from a few rows ahead and asks you to get popcorn for them.
+    ][
+      #v(1em)
+      #text(fill: red)[*Would you do this?*]
+    ]
+  ]
 ]
 
 #slide[
-  = The Central Claim
+  = The Mentalistic Stance Prediction
 
-  #text(size: 1.1em)[
-    *Human social intelligence requires TWO co-equal systems:*
+  #toolbox.side-by-side[
+    #one-by-one[
+      *At the office:*
+
+      Boss desires: lunch, documents
+
+      Boss believes: intern will get it if asked
+    ][
+
+      Intern desires: to help boss
+
+      Intern believes: they can fulfill this task
+    ]
+  ][
+    #one-by-one(start: 3)[
+      *At the movies:*
+
+      Boss desires: popcorn
+
+      Boss believes: intern will get it if asked
+    ][
+
+      Intern desires: to help boss
+
+      Intern believes: they can fulfill this task
+    ]
   ]
 
-  #v(1em)
-
-  1. *Mentalistic Stance*
-     - Predict behavior via mental states
-     - Flexible across novel contexts
-     - Computationally demanding
-
-  #v(0.5em)
-
-  2. *Institutional Stance*
-     - Interpret behavior via roles and norms
-     - Efficient in structured contexts
-     - Makes behavior predictable without mind-reading
-
-  #v(1em)
-
-  Neither reduces to the other. Both are evolutionarily ancient.
-  Human uniqueness lies in their *generative* institutional stance.
-]
-
-#new-section[What Is an Institution?]
-
-#slide[
-  = Formal Definition
-
-  An institution is a *network of roles with normative entailments*
-
-  #v(1em)
-
-  *Components:*
-  - *Roles* (R): Positions agents can occupy
-  - *Norms* (φ): Rules that grant, obligate, or restrict behavior
-    - Node norms: Internal to a role
-    - Edge norms: Between roles
-  - *Structure*: How roles relate to each other
-
-  #v(1em)
-
-  *Key insight:* Roles are not isolated—they're understood as part of a broader institutional structure
+  #one-by-one(start: 5)[
+    *Theory of Mind says:* Movies scenario should be unsurprising
+  ][
+    - Same mental states, same belief-desire structure
+  ][
+    #text(fill: red)[*But it feels WRONG. Why?*]
+  ]
 ]
 
 #slide[
-  = Institutional Stance as Intuitive Theory
+  = The Institutional Stance Explanation
 
-  Satisfies Gopnik & Meltzoff criteria:
+  #toolbox.side-by-side[
+    #one-by-one[
+      *At the office:*
 
-  #v(0.5em)
+      Boss occupies role: "CEO"
 
-  1. *Abstract*: Roles/norms ≠ observable actions
-  2. *Coherent*: Components work as a system
-  3. *Causal*: Roles causally explain behavior
-     - "She did that *because* she's the manager"
-  4. *Ontological commitment*: We believe institutions are real
+      Intern occupies role: "assistant"
+    ][
+      #v(1em)
 
-  #v(1em)
+      Role-based norms: CEO can delegate tasks, assistant complies
+    ]
+  ][
+    #one-by-one(start: 4)[
+      *At the movies:*
 
-  *Example:* Seeing someone in an apron stocking shelves
-  - Not just "likes organizing"
-  - Occupying the role of "stock person"
-  - Expectations flow from the role, not personality
+      Boss: person at a movie theater
+
+      Intern: person on a date
+    ][
+
+      CEO/assistant roles are NOT ACTIVE in this context
+    ][
+
+      #text(fill: red)[Behavior violates norms]
+    ]
+  ]
+
+  #one-by-one(start: 7)[
+    Humans automatically track which roles are operative in each  context
+  ]
 ]
 
 #slide[
   = The Rental Car Example
 
-  Laurie arrives at rental car agency.
+  #one-by-one[
+    Laurie arrives at a rental car agency. Paul greets her and helps with the paperwork.
 
-  Paul helps with paperwork. Fee is higher than expected → argument starts.
+  ][
+    Fee is higher than expected → argument starts.
 
-  Paul excuses himself. Alex appears and continues exactly where Paul left off.
+  ][
+    Paul briefly excuses himself. A few minutes later, Alex appears and picks up the discussion with Laurie *right where Paul left off*.
 
-  #v(1em)
+  ][
+    *Mentalistic stance:* Transfer of Paul's beliefs/desires to Alex is strikingly odd!
 
-  *Mentalistic stance:* Transfer of Paul's beliefs/desires to Alex is bizarre!
+    *Institutional stance:* Unsurprising. Same role = same goals/behaviors.
 
-  *Institutional stance:* Unsurprising. Same role = same goals/behaviors.
-
-  #v(1em)
-
-  Compare: During a personal argument with a friend, imagine if they left and a casual acquaintance stepped in to continue arguing...
+  ]
 ]
 
-#new-section[Evolutionary Origins]
+#slide[
+  = Compare to Personal Relationships
+
+  Imagine during a personal argument with a close friend, the friend excuses themselves and a casual acquaintance steps in to continue arguing...
+
+  #text(fill: red)[*Now it would be bizarre!*]
+
+  The institutional stance is *not* warranted in personal relationships—transfer of goals would be surprising, if not off-putting.
+]
+
+#new-section[Intuitive Theories and Norm Violations]
 
 #slide[
-  = Three Stages of Development
+  = What is an Intuitive Theory?
 
-  *Stage 1: Proto-institutional*
-  - Rigid role-based systems
-  - No role-filler independence
-  - Examples: ant castes, kinship bonds
+  #one-by-one[
+    *Intuitive theories* are cognitive frameworks humans use to explain and predict behavior
+  ][
+    Like scientific theories, they:
+    - Make predictions about unobserved phenomena
+    - Explain causal relationships
+    - Support counterfactual reasoning
+  ][
+    Unlike scientific theories:
+    - Often implicit and automatic
+    - Develop early in childhood
+    - May not be consciously accessible
+  ][
+    Examples: intuitive physics, intuitive psychology (Theory of Mind), intuitive biology
+  ]
+]
 
-  #v(0.5em)
+#slide[
+  = Understanding Norm Violations
 
-  *Stage 2: Fixed institutional*
-  - Role-filler independence emerges
-  - Can swap roles, but limited set
-  - Examples: primate dominance hierarchies, lion hunting roles
+  #toolbox.side-by-side[
+    #one-by-one[
+      *Theory of Mind (Mentalistic Stance):*
+    ][
+      Norms are _inferred_ from mental states
+    ][
+      "They violated a norm because they failed to consider my beliefs/desires"
+    ][
+      Norm violations = failures of mind-reading
+    ]
+  ][
+    #one-by-one(start: 5)[
+      *Theory of Institutions (Institutional Stance):*
+    ][
+      Norms are _first-class citizens_
+    ][
+      "They violated a norm because they acted outside their role"
+    ][
+      Norm violations = violations of institutional structure
+    ]
+  ]
 
-  #v(0.5em)
+  #v(1em)
 
-  *Stage 3: Generative institutional* (humans)
-  - Create arbitrary new institutions
-  - "Grammar" for institutional structures
-  - Examples: soccer teams, universities, book clubs
+  #one-by-one(start: 9)[
+    The institutional stance treats social norms as fundamental features of reality, not derived from individual psychology
+  ]
+]
+
+#slide[
+  = Four Lines of Evidence for Theory of Mind
+
+  #text(size: 0.9em)[
+  #one-by-one[
+    *1. Evidence from infants*
+  ][
+    - Infants as young as 6 months track others' beliefs and knowledge states
+    - False belief understanding emerges early (implicit by 15 months)
+    - Gaze-following and joint attention by 9-12 months
+    - Suggests ToM is foundational to human cognition
+  ][
+    *2. Function in society*
+  ][
+    - Enables coordination without explicit communication
+    - Predicting others' actions based on their mental states
+    - Understanding deception, teaching, and cooperation
+    - Essential for human social complexity
+  ]
+  ]
+]
+
+#slide[
+  = Four Lines of Evidence for Theory of Mind (cont.)
+
+  #text(size: 0.9em)[
+  #one-by-one[
+    *3. Neural circuitry*
+  ][
+    - Dedicated brain regions: temporoparietal junction (TPJ), medial prefrontal cortex (mPFC)
+    - Consistent activation across mentalizing tasks
+    - Disruption leads to difficulties in social cognition
+    - Suggests specialized cognitive architecture
+  ][
+    *4. Automatic behavior*
+  ][
+    - Spontaneous mentalizing occurs without conscious effort
+    - Hard to "turn off" mental state attribution
+    - Adults automatically track others' perspectives even when irrelevant
+    - Suggests ToM is a default mode of social cognition
+  ][
+    *Conclusion:* Theory of Mind is well-established as a core human cognitive capacity
+  ]
+  ]
+]
+
+#new-section[Three Stages of Institutions]
+
+#slide[
+  = The Puzzle of Animal Social Coordination
+
+  #one-by-one[
+    Theory of Mind is powerful but cannot explain all social complexity
+
+  ][
+    Many species exhibit complex social coordination and cooperation
+
+  ][
+    Yet these species lack the sophisticated mentalizing abilities of humans
+
+  ][
+    *The Question:* If animals don't have Theory of Mind, how do they coordinate and cooperate with one another?
+
+  ]
+]
+
+#slide[
+  = A Hypothesis: Three Critical Stages
+
+  Solutions to social coordination evolved through three critical stages:
+
+  1. *Proto-institutional:* Rigid role-based systems (biologically determined)
+
+  2. *Fixed institutional:* Role-filler independence (roles can be swapped)
+
+  3. *Generative institutional:* Grammar of institutions (uniquely human)
+
+  Each stage adds flexibility and representational power
 ]
 
 #slide[
   = Stage 1: Proto-Institutional
+  #toolbox.side-by-side[
+    #image("images/stage_1.png", width: 60%)
+  ][
+    #one-by-one[
+      *The core idea:* Learn that specific individuals occupy specific roles
+    ][
+      This allows us to:
+      - Predict how this individual will act
+      - Understand how to interact with them
+      - Different roles = different social affordances
+    ][
+      *Example (kinship):* From young age, learn to identify who mother is and distinguish her from other humans
+    ]
+  ]
+]
 
-  *Social insects: Ants*
-  - Workers vs. soldiers (biologically determined)
-  - Each "role" has different affordances
-  - Dulosis: Captured worker ants continue their role in service of captors
+#slide[
+  = Stage 1: Key Limitation
 
-  #v(0.5em)
+  *No abstract representation of role vs. occupier*
 
-  *Key limitation:* No abstract representation of role vs. occupier
-  - Agent IS the role
-  - No swapping possible
-  - Still enables coordination without mentalizing
+  The agent IS the role—just an association of specific individuals to social affordances
 
-  #v(0.5em)
+  No role swapping possible
 
-  Found across: kinship recognition, simple dominance, coordinated hunting (falcons)
+  Still enables coordination without mentalizing
 ]
 
 #slide[
   = Stage 2: Fixed Institutional
 
-  *Primates: Baboon dominance hierarchies*
-  - Dynamic, continuously renegotiated
-  - Specialized intelligence for tracking role changes
-  - Role-filler independence: know that Alex *is currently* alpha
+  #toolbox.side-by-side[
+    #image("images/stage_2.png", width: 80%)
+  ][
+    #one-by-one[
+      *The core idea:* Any individual can occupy specific roles
 
-  #v(0.5em)
+    ][
+      Abstract representation of roles independent of who occupies them
 
-  *Lions: Coordinated hunting*
-  - Two center hunters, two wings
-  - Role specialization + ability to switch
-  - Must understand all roles need filling
+    ][
+      Agents can track and remember:
+      - Which role an individual occupies
+      - When roles change
+      - How to adjust behavior accordingly
 
-  #v(0.5em)
-
-  *Honey bees: Forager/receiver*
-  - Tremble dance signals need for role switching
-  - Some foragers switch to receivers dynamically
+    ]
+  ]
 ]
 
 #slide[
-  = Stage 3: Generative (Humans Only)
+  = Stage 2: Examples
 
-  *The explosion of institutional diversity:*
-  - Reading clubs
-  - Neighborhood associations
-  - University committees
-  - Governments
-  - Startups
-  - Sports teams
+  #one-by-one[
+    *Baboon dominance hierarchies:* Dynamic, continuously renegotiated
+    - Know that Alex *is currently* alpha (not inherently alpha)
+    - Specialized intelligence for tracking role changes
 
-  #v(1em)
+  ][
+    *Lions coordinated hunting:* Two center hunters, two wings
+    - Role specialization + ability to switch
+    - Must understand all roles need filling
 
-  *Key: Grammar of institutions*
-  - Compositional system
-  - Create unbounded new structures
-  - Rapid synthesis and inference
-  - Cultural evolution of institutions
-
-  #v(0.5em)
-
-  This is the uniquely human capacity.
-]
-
-#new-section[Development & Acquisition]
-
-#slide[
-  = Early Role-Based Reasoning
-
-  *Infants (prelinguistic):*
-  - Understand dominance relations (who defers to whom)
-  - Distinguish dominance by fear vs. dominance by social grant
-  - Make transitive inferences in hierarchies
-  - Understand caring relations (shaped by own attachment)
-
-  #v(0.5em)
-
-  *Surprising role sensitivity:*
-  - Object transfer → representation of "giving"
-  - Improved memory for objects in giving context
-  - Detect agent/patient role reversals
-
-  #v(0.5em)
-
-  *Tseltal infants (Mexico):* Learn honorifics through passive exposure → tracking social categories/roles early
+  ]
 ]
 
 #slide[
-  = Toddlers & Young Children
+  = Stage 2: Key Limitation
 
-  *3-year-olds:*
-  - Fail false belief tasks (mentalistic)
-  - But succeed when framed as rule-following (institutional)
-  - _"Dolls always go in the toy box"_ → predict search there
+  *The set of roles available to interpret behavior are pre-determined*
 
-  #v(0.5em)
+  No cultural evolution or emergence of novel institutional structures
 
-  *Role-based memory:*
-  - Better at remembering role-based events than specific events
-  - Make strong inferences from schemas
+  Cannot create new roles or institutional arrangements
 
-  #v(0.5em)
-
-  *Sociodramatic role play:*
-  - Pretend to be caregivers, shopkeepers, doctors
-  - Not fantastical—mundane real-life roles
-  - Practice for institutional stance?
+  The institutional representations are fixed—determined by biology or evolutionary history
 ]
 
 #slide[
-  = Learning Mechanisms
+  = Stage 3: Generative Institutional
 
-  1. *Statistical learning*
-     - Covariation between behavior and context
-     - Person always greets at building → role inference
+  #toolbox.side-by-side[
+    #image("images/stage_3.png", width: 80%)
+  ][
+    #one-by-one[
+      *The core idea:* Generative system to synthesize novel institutional structures
 
-  #v(0.5em)
+    ][
+      Multiple institutional representations operating simultaneously:
+      - Dominance hierarchies
+      - Caregiving/kinship relations
+      - Hunting coordination
 
-  2. *Norm scope inference*
-     - Which group/role does this norm apply to?
-     - Rational inference from behavioral patterns
+    ][
+      Must reason about how these structures combine and interact compositionally
 
-  #v(0.5em)
-
-  3. *Implausibility detection*
-     - Unlikely mental states signal roles
-     - Doorman rushing to open door → role, not personality
-
-  #v(0.5em)
-
-  4. *Bayesian structure learning*
-     - Adults can infer latent social structures
-     - Reconstruct org charts from sparse interactions
-]
-
-#new-section[Institutional Stance in Action]
-
-#slide[
-  = When Do We Deploy It?
-
-  *Status indicators:*
-  - Uniforms (police, doctors, baristas)
-  - Verbal disclosure: "I'm writing in my capacity as Chair..."
-  - Linguistic markers: Honorifics, formal pronouns (usted, -san)
-  - Historical surnames (Smith, Baker, Cook)
-
-  #v(1em)
-
-  *Context inference:*
-  - Knowledge of typical institutional settings
-  - Coffee shop → person asking for order is likely employee
-  - May be pervasively active in background
+    ]
+  ]
 ]
 
 #slide[
-  = The Apron Effect
+  = Stage 3: The Grammar of Institutions
 
-  Two identical people, identical actions, identical context.
+  #one-by-one[
+    Humans have an *intuitive Theory of Institutions* (akin to Theory of Mind)
 
-  #v(0.5em)
+  ][
+    This enables us to:
+    1. Identify normatively structured systems of interconnected roles
+    2. Compositionally construct new such systems
+    3. Determine which agents occupy those roles
+    4. Use that knowledge to interact with others
 
-  *Person A (no apron):* Picks up olive oil bottle
-  - Inference: Likes olive oil, will cook with it
+  ][
+    *The explosion of institutional diversity:*
 
-  *Person B (wearing apron):* Picks up olive oil bottle
-  - Inference: Checking sell-by date, stocking shelves
-  - Says nothing about personal preferences
+    Reading clubs, sports teams, university committees, governments, startups, homeowner associations...
 
-  #v(1em)
+  ]
+]
 
-  A single marker completely changes our interpretive stance.
+#new-section[Institutions as Graphs]
+
+#slide[
+  = What is an Institution?
+
+  #one-by-one[
+    An institution is a *graph of roles with normative relations*
+
+  ][
+    *Nodes = Roles*
+    - Who can occupy the role
+    - Powers granted by the role
+    - Obligations imposed by it
+
+  ][
+    *Edges = Relations between roles*
+    - How roles interact with one another
+    - Can be directional or undirectional
+    - Can grant social power over another role
+
+  ][
+    *Key insight:* Roles are not isolated—they're understood as part of a broader institutional structure
+
+  ]
 ]
 
 #slide[
-  = Interplay with Mentalizing
+  = Example: Rental Car Agency
 
-  *Three modes of interaction:*
+  #align(center)[
+    #image("images/rental_car_clean.png", width: 100%)
+  ]
 
-  #v(0.5em)
-
-  1. *Institutional without mentalizing*
-     - Like vending machine: input → output
-     - Reduces cognitive load
-     - Barista example: assume coffee will arrive
-
-  #v(0.5em)
-
-  2. *Competition between stances*
-     - Institutional failure → trigger mentalistic
-     - Coffee delay → observe barista's mental state
-     - Unexpected formality → check if role is active
-
-  #v(0.5em)
-
-  3. *Rich combination*
-     - Roles can require mental states
-     - Stock person should "know" where items are
-     - But mental states are role-tagged, not personal
-]
-
-#new-section[Key Distinctions]
-
-#slide[
-  = Not Just Scripts
-
-  *Schemas/scripts (Schank & Abelson):*
-  - General knowledge organization
-  - Can apply to non-social domains (building a campfire)
-  - Pragmatically useful
-
-  #v(0.5em)
-
-  *Institutional stance:*
-  - Specialized intuitive theory
-  - Evolutionarily ancient
-  - Social-specific
-  - *Generative* in humans
-
-  #v(1em)
-
-  Scripts may share structure, but institutional stance is a dedicated system for social coordination.
+  *Role-Filler Independence:* Paul and Alex can both occupy the Service Rep role. When Alex replaces Paul, Alex inherits all norms of the role.
 ]
 
 #slide[
-  = Not Just Folk Sociology
+  = The Institutional Stance as an Intuitive Theory
 
-  *Folk sociology:*
-  - Focus on groups and categories
-  - Often essentialized (race, gender)
-  - Relatively undifferentiated members
+  #one-by-one[
+    To take an institutional stance is to use knowledge of graph structure as a *causal model* to interpret behavior
 
-  #v(0.5em)
+  ][
+    Like Theory of Mind, it supports prediction, interpretation, and explanation
 
-  *Institutional stance:*
-  - Focus on *structured relations* between roles
-  - Within-group differentiation (junior vs. senior faculty)
-  - Between-group relations (hierarchies)
+  ][
+    But *how do we know* the institutional stance is a proper intuitive theory?
 
-  #v(1em)
+  ][
+    Answer: It satisfies the four *Gopnik-Meltzoff structural features* of intuitive theories
 
-  Structural perspective can actually *challenge* essentialism:
-  - Gender/race as structural positions
-  - Not biological kinds but social roles in hierarchies
+  ]
 ]
 
 #slide[
-  = Not Just Shared Intentionality
+  = Four Structural Features of Intuitive Theories
 
-  *Shared intentionality (Tomasello):*
-  - Represents shared goals collaboratively
-  - "We intend to open this box together"
-  - Unique to humans, thoroughly mentalistic
+  #text(size: 0.9em)[
+  #one-by-one[
+    *1. Abstract:* Representations used to interpret behavior (roles, norms) differ from observable data (actions)
 
-  #v(0.5em)
+  ][
+    *2. Coherent:* Theoretical constructs work together as a single system—multiple components needed to interpret behavior
 
-  *Institutional stance:*
-  - Can operate *without* shared intentions
-  - "Minimal cooperation": just play your role
-  - Works if everyone knows their role
-  - No recursive mind-reading needed
+  ][
+    *3. Causal:* Roles have causal and explanatory power in the counterfactual sense
 
-  #v(1em)
+  ][
+    "The behavior would not have occurred had the agent not been occupying this role"
 
-  Shared intentionality crucial for *creating* new institutions
+  ][
+    *4. Ontological commitments:* We use the system to make counterfactual claims and predictions
 
-  But existing institutions can structure behavior without it
-]
-
-#new-section[Social Constitution]
-
-#slide[
-  = Institutions Create New Realities
-
-  *Socially constituted kinds:*
-  - Ballot, voting, citizen
-  - Teacher, money, property
-
-  #v(0.5em)
-
-  *Not merely socially constructed*
-  - Hammers are constructed (need people to make them)
-  - But hammers remain hammers independent of social beliefs
-
-  #v(0.5em)
-
-  *Socially constituted:*
-  - Existence sustained by institutional structures
-  - Ballot can cease to be ballot by institutional change
-  - No change in physical properties
-
-  #v(0.5em)
-
-  *Empirical evidence:* Children distinguish these by age 5-7
+  ]
+  ]
 ]
 
 #slide[
-  = Taking an Institutional Stance
+  = Why Graph Structure Matters
 
-  The stance is both:
-  - *Deployed*: Interpreting others' behavior through roles
-  - *Applied as analysis*: Revealing hidden institutional structures
+  #one-by-one[
+    *Not just a collection of isolated norms*
 
-  #v(1em)
+  ][
+    The rental car example revisited:
+    - Paul and Alex occupy the same *node* (service rep)
+    - This node has relations to the *customer* node
+    - When Alex replaces Paul, he inherits these relational norms
 
-  *Examples of application:*
-  - Analyzing race/gender/caste as structural positions
-  - Not essences, but roles in hierarchies
-  - Revealing systems of subordination
-  - Enables critique and transformation
+  ][
+    *Contrast with personal relationships:*
+    - Friend arguing with you: not part of formal institutional graph
+    - No "friend → friend" edge norm for argument-continuation
+    - Substitution violates expectations
 
-  #v(1em)
-
-  The institutional stance gives us tools to question and redesign social reality.
+  ]
 ]
 
-#new-section[Discussion Questions]
+#new-section[Creating New Institutions]
 
 #slide[
-  = Discussion 1: Empirical Evidence
+  = The Generative Capacity of Humans
 
-  *Questions to consider:*
+  #one-by-one[
+    We can explicitly represent institutional structures and reason *about* them
 
-  - How convincing is the Kate & Eric example?
-  - Are there alternative mentalistic explanations?
-  - What empirical tests would distinguish the stances?
+  ][
+    Not just reasoning *through* them (like proto-institutional animals)
 
-  #v(0.5em)
+  ][
+    This enables two uniquely human capacities:
 
-  *Development claims:*
-  - Does infant dominance understanding require institutional stance?
-  - Or could it be explained by simpler mechanisms?
+  ][
+    1. *Taking an institutional stance as an analytic tool*
 
-  #v(0.5em)
+    Reveal hidden role-based systems
 
-  *Neural evidence:*
-  - If institutional stance is ancient and specialized, where's the dedicated circuitry?
-  - Could it overlap with ToM network?
-]
+  ][
+    2. *Social constitution*
 
-#slide[
-  = Discussion 2: The Grammar Claim
+    Create genuinely new domains of behavior and social reality
 
-  *Claim:* Humans have a "grammar of institutions"
-
-  #v(0.5em)
-
-  *Questions:*
-  - What are the primitive operations?
-  - What's the compositional structure?
-  - Is it domain-specific or general intelligence?
-
-  #v(0.5em)
-
-  *Compare to language:*
-  - Language: Recursive syntax, universal grammar
-  - Institutions: Roles combine... how?
-
-  #v(0.5em)
-
-  *Challenge:* Institutions vary enormously across cultures
-  - More like cultural evolution than grammar?
-  - Or is there underlying universal structure?
+  ]
 ]
 
 #slide[
-  = Discussion 3: When Stances Conflict
+  = Analytic Tool: Revealing Hidden Structures
 
-  *Scenarios:*
+  #one-by-one[
+    We can analyze phenomena we might not initially think of as institutional
 
-  1. Bureaucrat follows rule you find unjust
-     - Institutional: "Just doing my job"
-     - Mentalistic: "They chose this"
+  ][
+    *Example:* Race, gender, and caste systems
 
-  #v(0.5em)
+  ][
+    Often essentialized (thought of as deep quasi-biological kinds)
 
-  2. Friend acts distant and formal
-     - Changed roles?
-     - Or changed mental states?
+  ][
+    But can be analyzed in *structural terms*
 
-  #v(0.5em)
+  ][
+    Revealed as hierarchical systems of interlocking social roles
 
-  *Questions:*
-  - Which stance do we privilege?
-  - When is "just following orders" legitimate?
-  - How do cultural values affect this?
+  ][
+    "Woman" as a structural position defined in subordination to "man"
+
+  ][
+    Once revealed → we can evaluate, modify, or intentionally subvert them
+
+  ]
 ]
 
 #slide[
-  = Discussion 4: Dehumanization
+  = Social Constitution: Creating New Realities
 
-  *The dark side:*
+  #one-by-one[
+    Some entities are *socially constituted* (not just constructed)
 
-  Strong institutional stance might reduce mentalizing
-  - See role-player, not person
-  - Reduce empathy
-  - "Banality of evil" (Eichmann defense)
+  ][
+    Their existence is actively sustained by institutional structures
 
-  #v(1em)
+  ][
+    *Examples:* Ballots, voting, citizenship
 
-  *Questions:*
-  - Is dehumanization linked to institutional stance?
-  - Service workers treated instrumentally?
-  - How to balance efficiency and humanity?
-  - Can institutional stance be liberating instead?
+  ]
 ]
 
 #slide[
-  = Discussion 5: AI and Institutions
+  = Socially Constituted vs. Socially Constructed
 
-  *Implications for AI systems:*
+  #toolbox.side-by-side[
+    *Socially Constructed:*
 
-  #v(0.5em)
+    Hammers, carpentry, carpenters
 
-  1. *Human-AI interaction*
-     - Should AI act through institutional roles?
-     - Does it reduce need for AI "alignment"?
+    Social forces involved in creation, but existence doesn't require social agreement
 
-  #v(0.5em)
+    *A hammer remains a hammer even if institutions change*
+  ][
+    *Socially Constituted:*
 
-  2. *Multi-agent AI*
-     - Design through institutional structures?
-     - Coordination without full mentalizing
+    Ballots, voting, citizens
 
-  #v(0.5em)
+    Existence requires institutional structures
 
-  3. *AI governance*
-     - Institutions for AI systems
-     - Who designs them? How?
+    *A ballot can cease to be a ballot through institutional change*
 
-  #v(0.5em)
-
-  *Your thoughts:* How does this framework apply to your research?
+    Even without changing physical properties
+  ]
 ]
 
-#new-section[Critical Evaluation]
+#new-section[Conclusion]
 
 #slide[
-  = Strengths of the Paper
+  = Implications: The Power to Create and Transform
+  #one-by-one[
+    The institutional stance enables us to:
+  ][
+    1. *Analyze existing institutions*
 
-  1. *Compelling examples*
-     - Kate & Eric, rental car agency
-     - Phenomenologically accurate
+    Reveal hidden hierarchies and role-based systems
+  ][
+    2. *Critique unfair systems*
 
-  #v(0.5em)
+    Evaluate oppressive institutional structures
+  ][
+    3. *Imagine alternatives*
 
-  2. *Evolutionary story*
-     - Cross-species evidence
-     - Plausible progression
+    Consider how to modify or erase unjust institutions
+  ][
+    4. *Create new realities*
 
-  #v(0.5em)
-
-  3. *Unifies diverse phenomena*
-     - Connects development, evolution, culture
-     - Links to folk sociology, scripts, shared intentionality
-
-  #v(0.5em)
-
-  4. *Practical implications*
-     - Social change, AI, governance
-]
-
-#slide[
-  = Limitations and Open Questions
-
-  1. *Lack of formalization*
-     - What exactly is the "grammar"?
-     - How does inference work computationally?
-
-  #v(0.5em)
-
-  2. *Neural evidence sparse*
-     - Where is the specialized circuitry?
-     - How to test empirically?
-
-  #v(0.5em)
-
-  3. *Boundary cases unclear*
-     - When exactly do we deploy each stance?
-     - How do we decide?
-
-  #v(0.5em)
-
-  4. *Cultural variation*
-     - How much is universal vs. learned?
-     - Grammar metaphor may be oversold
-]
-
-#slide[
-  = What Would Change Your Mind?
-
-  *Evidence that would challenge the institutional stance:*
-
-  #v(0.5em)
-
-  - Kate & Eric scenario feels natural in some cultures?
-  - Infants' dominance understanding is fully mentalistic?
-  - All "institutional" predictions can be made mentalistically?
-  - No distinct neural signature found?
-
-  #v(1em)
-
-  *Evidence that would strengthen it:*
-
-  #v(0.5em)
-
-  - Computational model makes novel predictions?
-  - Distinct neural circuitry identified?
-  - Developmental dissociations found?
-  - Cross-cultural universals in institutional reasoning?
-]
-
-#new-section[Takeaways]
-
-#slide[
-  = Core Message
-
-  *Traditional view:* Human social intelligence = Mentalizing
-
-  *This paper:* Human social intelligence = Mentalizing + Institutional reasoning
-
-  #v(1em)
-
-  *The institutional stance:*
-  - Evolutionarily ancient (precursors across species)
-  - Early developing (infancy)
-  - Uniquely generative in humans
-  - Co-equal with mentalizing
-  - Enables large-scale coordination
-  - Creates new social realities
-
-  #v(1em)
-
-  Neither stance reduces to the other. Both are essential.
-]
-
-#slide[
-  = For Your Research
-
-  *Potential applications:*
-
-  #v(0.5em)
-
-  - Multi-agent coordination problems
-  - Institutional design for AI systems
-  - Understanding organizational behavior
-  - Governance and collective decision-making
-  - Human-AI interaction paradigms
-
-  #v(1em)
-
-  *Questions to ask:*
-  - Where do roles structure behavior in your domain?
-  - Could institutional analysis simplify the problem?
-  - What institutions should we design?
+    Synthesize novel institutional structures that genuinely create new social kinds
+  ][
+    The generative aspect allows us to imagine and pursue genuine institutional alternatives
+  ]
 ]
 
 #slide[

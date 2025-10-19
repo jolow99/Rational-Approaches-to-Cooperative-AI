@@ -1,0 +1,11 @@
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px', 'fontFamily':'Arial'}}}%%
+graph LR
+    SpouseA["<b>Spouse A</b><br/><br/>Occupied By: Adults<br/>Powers: Property rights<br/>Obligations: Emotional support"]
+    SpouseB["<b>Spouse B</b><br/><br/>Occupied By: Adults<br/>Powers: Property rights<br/>Obligations: Emotional support"]
+
+    %% Edge norms between roles
+    SpouseA <==> |"Mutual support,<br/>shared decisions"| SpouseB
+
+    %% Styling
+    style SpouseA fill:#e8f0f8,stroke:#3a6ea5,stroke-width:4px
+    style SpouseB fill:#f8f0e8,stroke:#a57a3a,stroke-width:4px
