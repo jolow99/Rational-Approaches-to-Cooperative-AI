@@ -6,7 +6,7 @@
     (name: "Joseph Low", email: "jolow999@gmail.com", affiliation: "Metagov"),
     (name: "Emiel Robben", email: "e1518367@u.nus.edu", affiliation: "NUS, Chalmers"),
   ),
-  abstract: [This progress report documents our work investigating how agents with uncertain beliefs about how a group is best organized converge on a shared understanding of their role in the group. We report on our implementation of baseline coordination models and outline remaining work to incorporate asymmetry and inverse planning approaches.],
+  abstract: [His progress report documents our work investigating how agents with uncertain beliefs about how a group is best organized converge on a shared understanding of their role in the group. We report on our implementation of baseline coordination models and outline remaining work to incorporate asymmetry and inverse planning approaches.],
   date: "Oct 10, 2025",
 )
 #set cite(style: "chicago-author-date")
