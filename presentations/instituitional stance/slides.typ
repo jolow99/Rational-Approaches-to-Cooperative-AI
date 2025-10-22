@@ -414,10 +414,10 @@
 ]
 
 #slide[
-  = Discussion Question
+  = Discussion Question \#1
 
   - Do people understand each other in ways that cannot be reduced to mentalizing?
-  - What does it mean to reduce social reasoning to mentalizing?
+    - What does it mean to reduce social reasoning to mentalizing?
 ]
 
 #slide[
@@ -442,13 +442,19 @@
       Social groups and institutions have properties and causal powers of their own.
     ]
   ]
+]
 
-  #one-by-one(start: 3)[
-    #v(1em)
-    #align(center)[
-      #text(fill: rgb("#A23B72"))[
-        *Is mentalizing an individual or collective action?*
-      ]
+#slide[
+  = Discussion Question \#1
+
+  - Do people understand each other in ways that cannot be reduced to mentalizing?
+    - What does it mean to reduce social reasoning to mentalizing?
+
+  #v(1em)
+
+  #align(center)[
+    #text(fill: rgb("#A23B72"))[
+      *Is mentalizing an individual or collective action?*
     ]
   ]
 ]
@@ -482,7 +488,7 @@
 // TODO: Put discussion question from the reflection.
 // Before putting the papers answer
 #slide[
-  = Discussion Question
+  = Discussion Question \#2
 
   #one-by-one[
     *Are institutions just collections of norms?*
@@ -498,130 +504,154 @@
 // 6.1 How do people acquire and learn these things?
 // 6.2 When do people use institutional stance
 // When do people use  BOTH together? fig 1c / fig 1d
-// Institution having beliefs / desires 
-
-#new-section[Creating New Institutions]
+// Institution having beliefs / desires
 
 #slide[
-  = The Generative Capacity of Humans
+  = Discussion Question \#3
+
+  Q2) As we saw last week, Norm-augmented Markov Games (NMG) allow agents to model collective behavior as guided by shared norms:
+
+  #align(center)[
+    $P("action histories") = sum_"norms" P("norms") product_i P("actions of agent" i | "norms")$
+  ]
+
+  This factors into a prior over shared norms $P("norms")$ and an individual, norm-independent component $P("actions of agent" i | "norms")$ for each agent.
+
+  #v(1em)
+
+  Can this generative model capture institutional representations? How would you add structure to each agent's priors over collective behavior to capture the institutional stance?
+]
+
+#slide[
+  = Attempt at a solution: Extended Model for Institutional Stance
+
+  NMG doesn't fully capture institutions—it assumes fixed, known roles and all agents relate to norms the same way.
+
+  #text(size: 0.85em)[
+    *Key extension:* Make roles and institutional structure latent and learnable.
+
+    Original NMG:
+    $P("action histories") = sum_"norms" P("norms") product_i P("actions"_i | "norms")$
+
+    #v(0.5em)
+
+    *Institutional model:*
+    $P("action histories") = sum_(I, R) P(I, R) product_i P("actions"_i | "role"_i, I, R)$
+
+    Where:
+    - $I$ = institutional structure (graph of roles)
+    - $R$ = role assignments for each agent
+    - $P(I, R) = P(I) dot P(R | I)$ factorizes into structure and assignments
+
+    Agents must now infer: (1) which institutional structure is operative, (2) which role each agent occupies, (3) internal and inter-role norms
+  ]
+]
+
+#new-section[Interplay with Mentalizing]
+
+#slide[
+  = When Do We Use Each Stance?
 
   #one-by-one[
-    We can explicitly represent institutional structures and reason *about* them
+    *1) Institutional stance without mentalizing:*
 
+    Reduces cognitive costs—order coffee and expect it to appear without tracking mental states, like using a vending machine.
   ][
-    Not just reasoning *through* them (like proto-institutional animals)
+    
+    *2) Competition between stances:*
 
+    When predictions fail, we switch. Coffee delayed? Start mentalizing—are they busy or did they forget? Acting unusually formal? Consider institutional context—maybe their boss is watching.
   ][
-    This enables two uniquely human capacities:
+    
+    *3) We can also combine the stances:*
 
-  ][
-    1. *Taking an institutional stance as an analytic tool*
-
-    Reveal hidden role-based systems
-
-  ][
-    2. *Social constitution*
-
-    Create genuinely new domains of behavior and social reality
-
+    Roles can encode mental state expectations, and we can attribute mental states to institutions themselves.
   ]
 ]
 
 #slide[
-  = Analytic Tool: Revealing Hidden Structures
-
-  #one-by-one[
-    We can analyze phenomena we might not initially think of as institutional
-
-  ][
-    *Example:* Race, gender, and caste systems
-
-  ][
-    Often essentialized (thought of as deep quasi-biological kinds)
-
-  ][
-    But can be analyzed in *structural terms*
-
-  ][
-    Revealed as hierarchical systems of interlocking social roles
-
-  ][
-    "Woman" as a structural position defined in subordination to "man"
-
-  ][
-    Once revealed → we can evaluate, modify, or intentionally subvert them
-
-  ]
-]
-
-#slide[
-  = Social Constitution: Creating New Realities
-
-  #one-by-one[
-    Some entities are *socially constituted* (not just constructed)
-
-  ][
-    Their existence is actively sustained by institutional structures
-
-  ][
-    *Examples:* Ballots, voting, citizenship
-
-  ]
-]
-
-#slide[
-  = Socially Constituted vs. Socially Constructed
+  = Institutional Stance with Mentalistic Agents
 
   #toolbox.side-by-side[
-    *Socially Constructed:*
-
-    Hammers, carpentry, carpenters
-
-    Social forces involved in creation, but existence doesn't require social agreement
-
-    *A hammer remains a hammer even if institutions change*
+    #image("images/fig1c.png", width: 80%)
   ][
-    *Socially Constituted:*
+    Roles can encode expectations about mental states
 
-    Ballots, voting, citizens
+    *Example:* Stock person at supermarket
+    - Role requires knowing where items are located
+    - But we don't infer they're passionate about supermarkets
+    - Mental states are tagged to the role, not the person
+  ]
+]
 
-    Existence requires institutional structures
+#slide[
+  = Mentalistic Stance to Understand Institutions
 
-    *A ballot can cease to be a ballot through institutional change*
+  #toolbox.side-by-side[
+    #image("images/fig1d.png", width: 80%)
+  ][
+    We attribute mental states to institutional representations themselves
 
-    Even without changing physical properties
+    *Example:* "Russia wants to annex Ukraine"
+    - Ascribing desires and intentions to groups
+    - Anthropomorphizing institutions and roles
+    - General capacity to treat collectives as mental agents
+  ]
+]
+
+#slide[
+  = Discussion Question \#4
+
+  1) Consider the way an individual agent models the group it is part of in the *Imagined We* and *Bayesian Delegation* papers.
+
+
+  Would you describe those models as an application of the institutional stance, or the mentalistic stance? Why?
+]
+
+#slide[
+  = Discussion Question \#5
+
+  3) The authors argue that possessing the institutional stance allows people to move beyond treating social categories like race, gender or caste as essential/immutable features, and instead understand such categories as contingent roles within institutions.
+
+
+  If each stance corresponds to a probabilistic generative model of the social world, how would those models differ? What evidence would cause someone to decrease belief in an essentialist model and increase belief in an institutional model?
+]
+
+#slide[
+  = Essentialist vs Institutional Models
+
+  #align(center)[
+    #image("images/essentialist_vs_institutional-1.png", width: 95%)
+  ]
+
+  #text(size: 0.85em)[
+    *Key difference:* Essentialist models use hard-coded priors (stable across contexts), while institutional models use contingent priors (dependent on roles and norms).
+
+    *Evidence needed:* Counterfactual showing behavior changes with context proves priors are institutionally produced, not essential.
   ]
 ]
 
 #new-section[Conclusion]
-// TODO: Add discussion question Q3. The authors argue that possessing the institutional stance allows people to move beyond treating social categories like race, gender or caste as an essential / immutable feature of an agent, and instead understand such categories as contingent roles within a (potentially oppressive) institution. If each of these stances corresponds to a probabilistic generative model of the social world, how would those models differ? What kind of evidence would cause someone to decrease their belief in an essentialist model of a social category, and increase their belief in an institutional model?
 
 #slide[
   = Implications: The Power to Create and Transform
-  #one-by-one[
-    The institutional stance enables us to:
-  ][
-    1. *Analyze existing institutions*
 
-    Reveal hidden hierarchies and role-based systems
-  ][
-    2. *Critique unfair systems*
+  The institutional stance enables us to:
 
-    Evaluate oppressive institutional structures
-  ][
-    3. *Imagine alternatives*
+  1. *Analyze existing institutions:*
+     Reveal hidden hierarchies and role-based systems
 
-    Consider how to modify or erase unjust institutions
-  ][
-    4. *Create new realities*
+  2. *Critique unfair systems:*
+     Evaluate oppressive institutional structures
 
-    Synthesize novel institutional structures that genuinely create new social kinds
-  ][
-    The generative aspect allows us to imagine and pursue genuine institutional alternatives
-  ]
+  3. *Imagine alternatives:*
+     Consider how to modify or erase unjust institutions
+
+  4. *Create new realities:*
+     Synthesize novel institutional structures that genuinely create new social kinds. The generative aspect allows us to imagine and pursue genuine institutional alternatives
 ]
 
 #slide[
   #show: focus
-  Questions & Discussion
+  Questions & Further Discussion
 ]
