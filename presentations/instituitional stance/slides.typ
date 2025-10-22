@@ -2,7 +2,7 @@
 #import "@preview/metropolis-polylux:0.1.0" as metropolis
 #import metropolis: new-section, focus
 
-#enable-handout-mode(true)
+#enable-handout-mode(false)
 
 #show: metropolis.setup.with(
   text-font: "Helvetica Neue",
@@ -147,7 +147,6 @@
 
       Intern occupies role: "assistant"
     ][
-      #v(1em)
 
       Role-based norms: CEO can delegate tasks, assistant complies
     ]
@@ -202,107 +201,31 @@
   The institutional stance is *not* warranted in personal relationships—transfer of goals would be surprising, if not off-putting.
 ]
 
-#new-section[Intuitive Theories and Norm Violations]
-
 #slide[
-  = What is an Intuitive Theory?
+  = Mentalistic Stance vs Institutional Stance visualized
 
-  #one-by-one[
-    *Intuitive theories* are cognitive frameworks humans use to explain and predict behavior
-  ][
-    Like scientific theories, they:
-    - Make predictions about unobserved phenomena
-    - Explain causal relationships
-    - Support counterfactual reasoning
-  ][
-    Unlike scientific theories:
-    - Often implicit and automatic
-    - Develop early in childhood
-    - May not be consciously accessible
-  ][
-    Examples: intuitive physics, intuitive psychology (Theory of Mind), intuitive biology
-  ]
-]
-
-#slide[
-  = Understanding Norm Violations
-
-  #toolbox.side-by-side[
+  #toolbox.side-by-side(columns: (1fr, 1fr))[
     #one-by-one[
-      *Theory of Mind (Mentalistic Stance):*
-    ][
-      Norms are _inferred_ from mental states
-    ][
-      "They violated a norm because they failed to consider my beliefs/desires"
-    ][
-      Norm violations = failures of mind-reading
+      #align(center)[
+        #image("images/fig1a.png", width: 90%)
+
+        #text(size: 0.8em)[*Mentalistic Stance:* Individual beliefs and desires]
+      ]
     ]
   ][
-    #one-by-one(start: 5)[
-      *Theory of Institutions (Institutional Stance):*
-    ][
-      Norms are _first-class citizens_
-    ][
-      "They violated a norm because they acted outside their role"
-    ][
-      Norm violations = violations of institutional structure
+    #one-by-one(start: 2)[
+      #align(center)[
+        #image("images/fig1b.png", width: 90%)
+
+        #text(size: 0.8em)[*Institutional Stance:* Roles and normative relations]
+      ]
     ]
   ]
-
-  #v(1em)
-
-  #one-by-one(start: 9)[
-    The institutional stance treats social norms as fundamental features of reality, not derived from individual psychology
-  ]
 ]
 
-#slide[
-  = Four Lines of Evidence for Theory of Mind
 
-  #text(size: 0.9em)[
-  #one-by-one[
-    *1. Evidence from infants*
-  ][
-    - Infants as young as 6 months track others' beliefs and knowledge states
-    - False belief understanding emerges early (implicit by 15 months)
-    - Gaze-following and joint attention by 9-12 months
-    - Suggests ToM is foundational to human cognition
-  ][
-    *2. Function in society*
-  ][
-    - Enables coordination without explicit communication
-    - Predicting others' actions based on their mental states
-    - Understanding deception, teaching, and cooperation
-    - Essential for human social complexity
-  ]
-  ]
-]
 
-#slide[
-  = Four Lines of Evidence for Theory of Mind (cont.)
-
-  #text(size: 0.9em)[
-  #one-by-one[
-    *3. Neural circuitry*
-  ][
-    - Dedicated brain regions: temporoparietal junction (TPJ), medial prefrontal cortex (mPFC)
-    - Consistent activation across mentalizing tasks
-    - Disruption leads to difficulties in social cognition
-    - Suggests specialized cognitive architecture
-  ][
-    *4. Automatic behavior*
-  ][
-    - Spontaneous mentalizing occurs without conscious effort
-    - Hard to "turn off" mental state attribution
-    - Adults automatically track others' perspectives even when irrelevant
-    - Suggests ToM is a default mode of social cognition
-  ][
-    *Conclusion:* Theory of Mind is well-established as a core human cognitive capacity
-  ]
-  ]
-]
-
-#new-section[Three Stages of Institutions]
+#new-section[Three Stages of the Institutional Stance]
 
 #slide[
   = The Puzzle of Animal Social Coordination
@@ -336,21 +259,34 @@
   Each stage adds flexibility and representational power
 ]
 
+
+// TODO: Use animal example. Imprint. Identify their parents. Duckling imprinting
 #slide[
-  = Stage 1: Proto-Institutional
+  = Stage 1: Proto-Institutional Reprensentations
   #toolbox.side-by-side[
     #image("images/stage_1.png", width: 60%)
   ][
-    #one-by-one[
-      *The core idea:* Learn that specific individuals occupy specific roles
-    ][
-      This allows us to:
-      - Predict how this individual will act
-      - Understand how to interact with them
-      - Different roles = different social affordances
-    ][
-      *Example (kinship):* From young age, learn to identify who mother is and distinguish her from other humans
-    ]
+    *The core idea:* Learn that specific individuals occupy specific roles
+
+    This allows us to:
+    - Predict how this individual will act
+    - Understand how to interact with them
+    - Different roles = different social affordances
+  ]
+]
+
+#slide[
+  = Stage 1 Example: Imprinting
+
+  #toolbox.side-by-side[
+    #image("images/imprinting.png", width: 90%)
+  ][
+    Shortly after hatching, ducklings identify the first moving object as "mother"
+
+    Proto-institutional representation:
+    - Learn to identify who occupies the "mother" role
+    - Associate this specific individual with caregiving behaviors
+    - To the duckling, mother-role and occupier of role are fused
   ]
 ]
 
@@ -366,41 +302,37 @@
   Still enables coordination without mentalizing
 ]
 
+// TODO: Maybe add animals here! Duckling imprinting
 #slide[
-  = Stage 2: Fixed Institutional
+  = Stage 2: Fixed Institutional Reprensentations
 
   #toolbox.side-by-side[
     #image("images/stage_2.png", width: 80%)
   ][
-    #one-by-one[
-      *The core idea:* Any individual can occupy specific roles
+    *The core idea:* Any individual can occupy specific roles
 
-    ][
-      Abstract representation of roles independent of who occupies them
+    Abstract representation of roles independent of who occupies them
 
-    ][
-      Agents can track and remember:
-      - Which role an individual occupies
-      - When roles change
-      - How to adjust behavior accordingly
-
-    ]
+    Agents can track and remember:
+    - Which role an individual occupies
+    - When roles change
+    - How to adjust behavior accordingly
   ]
 ]
 
 #slide[
-  = Stage 2: Examples
+  = Stage 2 Example: Lions Coordinated Hunting
 
-  #one-by-one[
-    *Baboon dominance hierarchies:* Dynamic, continuously renegotiated
-    - Know that Alex *is currently* alpha (not inherently alpha)
-    - Specialized intelligence for tracking role changes
-
+  #toolbox.side-by-side[
+    #image("images/lion.png", width: 100%)
   ][
-    *Lions coordinated hunting:* Two center hunters, two wings
-    - Role specialization + ability to switch
-    - Must understand all roles need filling
+    Lions hunt in coordinated formations: center hunters and wing hunters
 
+    Fixed institutional representation:
+    - Role specialization with ability to switch positions
+    - Must understand all roles need filling
+    - Know which role each lion currently occupies
+    - Can adapt when roles change
   ]
 ]
 
@@ -417,45 +349,31 @@
 ]
 
 #slide[
-  = Stage 3: Generative Institutional
+  = Stage 3: Generative Institutional Representations
 
   #toolbox.side-by-side[
     #image("images/stage_3.png", width: 80%)
   ][
-    #one-by-one[
-      *The core idea:* Generative system to synthesize novel institutional structures
+    *The core idea:* Generative system to synthesize novel institutional structures
 
-    ][
-      Multiple institutional representations operating simultaneously:
-      - Dominance hierarchies
-      - Caregiving/kinship relations
-      - Hunting coordination
-
-    ][
-      Must reason about how these structures combine and interact compositionally
-
-    ]
+    This enables us to:
+    1. Identify normatively structured systems of interconnected roles
+    2. Compositionally construct new such systems
+    3. Use that knowledge to interact with others
   ]
 ]
 
 #slide[
-  = Stage 3: The Grammar of Institutions
+  = Stage 3 Example: Attending Catholic Mass as Non-Catholic
 
-  #one-by-one[
-    Humans have an *intuitive Theory of Institutions* (akin to Theory of Mind)
-
+  #toolbox.side-by-side[
+    #image("images/mass.png", width: 90%)
   ][
-    This enables us to:
-    1. Identify normatively structured systems of interconnected roles
-    2. Compositionally construct new such systems
-    3. Determine which agents occupy those roles
-    4. Use that knowledge to interact with others
-
-  ][
-    *The explosion of institutional diversity:*
-
-    Reading clubs, sports teams, university committees, governments, startups, homeowner associations...
-
+    Even without prior experience, you can understand mass as an institutional structure:
+    - Identify roles: priest, altar servers, congregation
+    - Recognize hierarchical relations and ritual patterns
+    - Compositionally combine: religious authority + ceremony + worship
+    - Navigate appropriately without explicit instruction
   ]
 ]
 
@@ -465,13 +383,13 @@
   = What is an Institution?
 
   #one-by-one[
-    An institution is a *graph of roles with normative relations*
+    An institution can be modelled as a *graph of roles with normative relations*
 
   ][
     *Nodes = Roles*
-    - Who can occupy the role
-    - Powers granted by the role
-    - Obligations imposed by it
+    - Purpose: Task and Function. Who can occupy the role. 
+    - Power: Powers granted by the role
+    - Limitations: Obligations imposed by it
 
   ][
     *Edges = Relations between roles*
@@ -496,66 +414,91 @@
 ]
 
 #slide[
-  = The Institutional Stance as an Intuitive Theory
+  = Discussion Question
 
-  #one-by-one[
-    To take an institutional stance is to use knowledge of graph structure as a *causal model* to interpret behavior
+  - Do people understand each other in ways that cannot be reduced to mentalizing?
+  - What does it mean to reduce social reasoning to mentalizing?
+]
 
+#slide[
+  = Social Ontology: What is the nature of the social world?
+
+  Two philosophical stances in social ontology:
+
+  #toolbox.side-by-side[
+    #one-by-one[
+      *Methodological Individualism*
+
+      The view that social phenomena can and should be reduced to individual agents, their beliefs, actions, and interactions.
+
+      All social facts are ultimately facts about individuals.
+    ]
   ][
-    Like Theory of Mind, it supports prediction, interpretation, and explanation
+    #one-by-one(start: 2)[
+      *Methodological Collectivism*
 
-  ][
-    But *how do we know* the institutional stance is a proper intuitive theory?
+      The view that social phenomena have irreducible collective properties that cannot be fully reduced to individual-level facts.
 
-  ][
-    Answer: It satisfies the four *Gopnik-Meltzoff structural features* of intuitive theories
+      Social groups and institutions have properties and causal powers of their own.
+    ]
+  ]
 
+  #one-by-one(start: 3)[
+    #v(1em)
+    #align(center)[
+      #text(fill: rgb("#A23B72"))[
+        *Is mentalizing an individual or collective action?*
+      ]
+    ]
   ]
 ]
 
 #slide[
-  = Four Structural Features of Intuitive Theories
+  = The Institutional Stance as Non-Reductive Theory
 
-  #text(size: 0.9em)[
-  #one-by-one[
-    *1. Abstract:* Representations used to interpret behavior (roles, norms) differ from observable data (actions)
+  Relates to work that straddles methodological individualism/collectivism
 
+  #toolbox.side-by-side(columns: (1fr, 1fr, 1fr))[
+    #one-by-one[
+      *1. Representing Collectives*
+
+      Categories like race and gender as structural positions rather than essential properties
+    ]
   ][
-    *2. Coherent:* Theoretical constructs work together as a single system—multiple components needed to interpret behavior
+    #one-by-one(start: 2)[
+      *2. Representing Socially-Structured Behavior*
 
+      Norms enforced through social pressure (injunctive) or that simply emerge (descriptive)
+    ]
   ][
-    *3. Causal:* Roles have causal and explanatory power in the counterfactual sense
+    #one-by-one(start: 3)[
+      *3. Representing Interactions and Scripts*
 
-  ][
-    "The behavior would not have occurred had the agent not been occupying this role"
-
-  ][
-    *4. Ontological commitments:* We use the system to make counterfactual claims and predictions
-
-  ]
+      Schemas and scripts we learn, e.g. how to order coffee in a fancy cafe
+    ]
   ]
 ]
 
+// TODO: Put discussion question from the reflection.
+// Before putting the papers answer
 #slide[
-  = Why Graph Structure Matters
+  = Discussion Question
 
   #one-by-one[
-    *Not just a collection of isolated norms*
+    *Are institutions just collections of norms?*
 
   ][
-    The rental car example revisited:
-    - Paul and Alex occupy the same *node* (service rep)
-    - This node has relations to the *customer* node
-    - When Alex replaces Paul, he inherits these relational norms
-
+    *Answer:* Reasoning about when a norm becomes relevant or active in social settings requires a latent representation of the institutional structure. An account that simply enumerates injunctive and descriptive norms will be insufficient for this.
   ][
-    *Contrast with personal relationships:*
-    - Friend arguing with you: not part of formal institutional graph
-    - No "friend → friend" edge norm for argument-continuation
-    - Substitution violates expectations
-
+    
+    *Example:* When Alex replaces Paul at the rental car agency, he inherits the service rep role's norms—not because we transferred Paul's individual norms, but because both occupy the same structural position. The institutional graph activates norms based on role occupancy, not individual identity.
   ]
 ]
+
+// 6.1 How do people acquire and learn these things?
+// 6.2 When do people use institutional stance
+// When do people use  BOTH together? fig 1c / fig 1d
+// Institution having beliefs / desires 
 
 #new-section[Creating New Institutions]
 
@@ -651,6 +594,7 @@
 ]
 
 #new-section[Conclusion]
+// TODO: Add discussion question Q3. The authors argue that possessing the institutional stance allows people to move beyond treating social categories like race, gender or caste as an essential / immutable feature of an agent, and instead understand such categories as contingent roles within a (potentially oppressive) institution. If each of these stances corresponds to a probabilistic generative model of the social world, how would those models differ? What kind of evidence would cause someone to decrease their belief in an essentialist model of a social category, and increase their belief in an institutional model?
 
 #slide[
   = Implications: The Power to Create and Transform
